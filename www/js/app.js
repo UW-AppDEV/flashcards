@@ -120,7 +120,7 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards'])
     $scope.cards.push(angular.extend({}, newCard));
   }
 
-  $ionicModal.fromTemplateUrl('new-task.html', {
+  $ionicModal.fromTemplateUrl('templates/new-card.html', {
     scope: $scope,
     animation: 'slide-in-up'
   }).then(function(modal) {
@@ -144,6 +144,10 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards'])
   $scope.$on('modal.removed', function() {
     // Execute action
   });
+
+        $scope.createCard=function(card){
+            cards.push(card);
+        };
 })
 
 .controller('CardCtrl', function($scope, $ionicSwipeCardDelegate) {
@@ -152,3 +156,4 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards'])
     card.swipe();
   };
 });
+

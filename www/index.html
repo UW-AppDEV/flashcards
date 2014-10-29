@@ -1,76 +1,48 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title></title>
-
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-
-    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
-<link href="css/ionic.app.css" rel="stylesheet">
--->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
     <script src="cordova.js"></script>
 
     <script src="js/app.js"></script>
     <script src="js/ionic.swipecards.js"></script>
-  </head>
+</head>
 
-  <body ng-app="starter"  ng-controller="CardsCtrl" no-scroll>
+<body ng-app="starter" ng-controller="CardsCtrl" no-scroll>
+<header class="bar bar-header bar-transparent">
+    <button class="button button-icon ion-navicon button-dark" ng-click="toggleProjects()"></button>
+    <h1 class="title">Title</h1>
+    <!-- New Task button-->
+    <button class="button button-clear button-light" ng-click="show()">Edit</button>
+</header>
+<ion-pane>
 
-    <ion-side-menus>
-      <!-- Center content -->
-      <ion-side-menu-content>
-        <header class="bar bar-header bar-transparent">
-          <button class="button button-icon ion-navicon button-dark" ng-click="toggleProjects()"></button>
-          <h1 class="title">Title</h1>
-          <!-- New Task button-->
-          <button class="button button-clear button-light" ng-click="show()">Edit</button>
-        </header>
-        <ion-pane >
-
-          <swipe-cards>
-            <swipe-card on-card-swipe="cardSwiped()" id="start-card">
-              Swipe down for a new card
-            </swipe-card>
-            <swipe-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-card-swipe="cardSwiped($index)">
-              <div ng-controller="CardCtrl">
+    <swipe-cards>
+        <swipe-card on-card-swipe="cardSwiped()" id="start-card">
+            Swipe down for a new card
+        </swipe-card>
+        <swipe-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-card-swipe="cardSwiped($index)">
+            <div ng-controller="CardCtrl">
                 <div class="title">
-                  {{card.title}}
+                    {{card.title}}
                 </div>
                 <div class="image">
-                  <img ng-src="{{card.image}}">
+                    <img ng-src="{{card.image}}">
                 </div>
                 <div class="button-bar">
-                  <button class="button button-clear button-positive" ng-click="goAway()">Got It</button>
-                  <button class="button button-clear button-positive" ng-click="goAway()">Prioritize</button>
+                    <button class="button button-clear button-positive" ng-click="goAway()">Got It</button>
+                    <button class="button button-clear button-positive" ng-click="goAway()">Prioritize</button>
                 </div>
-              </div>
-            </swipe-card>
-          </swipe-cards>
-        </ion-pane>
-      </ion-side-menu-content>
-
-      <!-- Left menu -->
-      <ion-side-menu side="left" has-header="true" >
-        <header class="bar bar-header bar-positive">
-          <h1 class="title">Projects</h1>
-          <button class="button button-icon" ng-click="newProject()">
-            <i class="ion ion-plus"></i>
-          </button>
-        </header>
-        <ion-content has-header="true">
-          <ion-list>
-            <ion-item ng-repeat="item in items" item="item">
-              Item {{ item.id }}
-            </ion-item>
-          </ion-list>
-        </ion-content>
-      </ion-side-menu>
-    </ion-side-menus>
-  </body>
+            </div>
+        </swipe-card>
+    </swipe-cards>
+</ion-pane>
+</body>
 
 </html>

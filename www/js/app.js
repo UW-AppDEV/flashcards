@@ -1,11 +1,23 @@
-// Ionic Starter App
+angular.module('ionic.utils', [])
+    .factory('$localstorage', ['$window', function ($window) {
+        return {
+            set: function (key, value) {
+                $window.localStorage[key] = value;
+            },
+            get: function (key, defaultValue) {
+                return $window.localStorage[key] || defaultValue;
+            },
+            setObject: function (key, value) {
+                $window.localStorage[key] = JSON.stringify(value);
+            },
+            getObject: function (key, defaultValue) {
+                return JSON.parse($window.localStorage[key] || JSON.stringify(defaultValue));
+            }
+        }
+    }]);
+angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils'])
 
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic', 'ionic.contrib.ui.cards'])
-
-    .run(function ($ionicPlatform) {
+    .run(function ($ionicPlatform, $localstorage) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -32,55 +44,25 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards'])
     })
 
 
-    .controller('CardsCtrl', function ($scope, $ionicSwipeCardDelegate, $ionicSideMenuDelegate, $ionicModal, $ionicActionSheet, $timeout) {
-        $scope.items = [
-            { id: 0 },
-            { id: 1 },
-            { id: 2 },
-            { id: 3 },
-            { id: 4 }
-        ];
-        /* OLD Card Data Structure
-        var cardTypes = [
-            {
-                title: 'Swipe down to clear the card',
-            },
-            {
-                title: 'Where is this?',
-            },
-            {
-                title: 'What kind of grass is this?',
-            },
-            {
-                title: 'What beach is this?',
-            },
-            {
-                title: 'What kind of clouds are these?',
-            }
+    .controller('CardsCtrl', function ($scope, $ionicSwipeCardDelegate, $ionicSideMenuDelegate, $ionicModal, $ionicActionSheet, $timeout, $localstorage) {
+        /*
+         Card Structure: IMPORTANT
+         set -> cards -> card
+         */
+        $scope.data = [
+            {default: 0}
         ];
 
-        $scope.cards = Array.prototype.slice.call(cardTypes, 0, 0);*/
-        /*
-            Card Structure:
-                set -> cards -> card
-         */
-        $scope.cards = [
+        $scope.data.default = [
             {title: 'Swipe down to clear the card',},
             {title: 'Where is this?',},
             {title: 'What kind of grass is this?',},
             {title: 'What beach is this?',},
             {title: 'What kind of clouds are these?',}
         ];
-        $scope.data=[
-            {default:0}
-        ];
-        $scope.data.default = [
-                {title: 'Swipe down to clear the card',},
-                {title: 'Where is this?',},
-                {title: 'What kind of grass is this?',},
-                {title: 'What beach is this?',},
-                {title: 'What kind of clouds are these?',}
-        ];
+
+        $scope.cards = Array.prototype.slice.call($scope.data.default, 0, 0);
+
         $scope.cardSwiped = function (index) {
             $scope.addCard();
         };
@@ -90,41 +72,37 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards'])
         };
 
         $scope.addCard = function () {
-            var newCard = $scope.cards[Math.floor(Math.random() * $scope.cards.length)];
+            var newCard = $scope.data.default[Math.floor(Math.random() * $scope.data.default.length)];
             newCard.id = Math.random();
             $scope.cards.push(angular.extend({}, newCard));
         }
-
-        $scope.createCard = function (card) {
-            cards.push(card);
-        };
         //=================================ACTION SHEET=================================
-        $scope.show = function() {
+        $scope.show = function () {
             // Show the action sheet
             var hideSheet = $ionicActionSheet.show({
                 buttons: [
-                    { text: '<b>New</b>' },
-                    { text: 'Edit' },
-                    { text: 'Move' },
-                    { text: 'Hide All' }
+                    {text: '<b>New</b>'},
+                    {text: 'Edit'},
+                    {text: 'Move'},
+                    {text: 'Hide All'}
                 ],
                 destructiveText: 'Delete',
                 titleText: 'Edit',
                 cancelText: 'Cancel',
-                cancel: function() {
+                cancel: function () {
                     // add cancel code..
                 },
-                buttonClicked: function(index) {
-                    if (index==0){
+                buttonClicked: function (index) {
+                    if (index == 0) {
                         $scope.openModal('new');
                     }
-                    else if (index == 1){
+                    else if (index == 1) {
                         alert("0");
                     }
-                    else if (index == 2){
+                    else if (index == 2) {
                         alert("0");
                     }
-                    else if (index == 3){
+                    else if (index == 3) {
                         alert("0");
                     }
                     return true;
@@ -132,7 +110,7 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards'])
             });
 
             // For example's sake, hide the sheet after two seconds
-            $timeout(function() {
+            $timeout(function () {
                 hideSheet();
             }, 20000);
 
@@ -171,7 +149,7 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards'])
         };
     })
     .controller('MenuCtrl', function ($scope) {
-        
+
     })
 ;
 

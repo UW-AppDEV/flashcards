@@ -116,7 +116,6 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards'])
         };
 
         $scope.show = function() {
-
             // Show the action sheet
             var hideSheet = $ionicActionSheet.show({
                 buttons: [
@@ -151,7 +150,7 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards'])
             // For example's sake, hide the sheet after two seconds
             $timeout(function() {
                 hideSheet();
-            }, 4000);
+            }, 20000);
 
         };
     })

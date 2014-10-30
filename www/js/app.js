@@ -154,5 +154,9 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards'])
             var card = $ionicSwipeCardDelegate.getSwipebleCard($scope);
             card.swipe();
         };
-    });
+    })
+    .controller('MenuCtrl', function ($scope) {
+        
+    })
+;
 

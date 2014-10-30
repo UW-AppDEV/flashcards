@@ -40,18 +40,16 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards'])
             { id: 3 },
             { id: 4 }
         ];
+        /* OLD Card Data Structure
         var cardTypes = [
             {
                 title: 'Swipe down to clear the card',
-                
             },
             {
                 title: 'Where is this?',
-                
             },
             {
                 title: 'What kind of grass is this?',
-                
             },
             {
                 title: 'What beach is this?',
@@ -61,8 +59,28 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards'])
             }
         ];
 
-        $scope.cards = Array.prototype.slice.call(cardTypes, 0, 0);
-
+        $scope.cards = Array.prototype.slice.call(cardTypes, 0, 0);*/
+        /*
+            Card Structure:
+                set -> cards -> card
+         */
+        $scope.cards = [
+            {title: 'Swipe down to clear the card',},
+            {title: 'Where is this?',},
+            {title: 'What kind of grass is this?',},
+            {title: 'What beach is this?',},
+            {title: 'What kind of clouds are these?',}
+        ];
+        $scope.data=[
+            {default:0}
+        ];
+        $scope.data.default = [
+                {title: 'Swipe down to clear the card',},
+                {title: 'Where is this?',},
+                {title: 'What kind of grass is this?',},
+                {title: 'What beach is this?',},
+                {title: 'What kind of clouds are these?',}
+        ];
         $scope.cardSwiped = function (index) {
             $scope.addCard();
         };
@@ -72,43 +90,15 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards'])
         };
 
         $scope.addCard = function () {
-            var newCard = cardTypes[Math.floor(Math.random() * cardTypes.length)];
+            var newCard = $scope.cards[Math.floor(Math.random() * $scope.cards.length)];
             newCard.id = Math.random();
             $scope.cards.push(angular.extend({}, newCard));
         }
 
-        $ionicModal.fromTemplateUrl('templates/new-card.html', {
-            scope: $scope,
-            animation: 'slide-in-up'
-        }).then(function (modal) {
-            $scope.modalnew = modal;
-        });
-        $ionicModal.fromTemplateUrl('templates/menu.html', {
-            scope: $scope,
-            animation: 'slide-in-up'
-        }).then(function (modal) {
-            $scope.modalmenu = modal;
-        });
-        $scope.openModal = function (id) {
-            if (id == "new")
-                $scope.modalnew.show();
-            else if (id == "menu")
-                $scope.modalmenu.show();
-        };
-        $scope.closeModal = function (id) {
-            if (id == "new")
-                $scope.modalnew.hide();
-            else if (id == "menu")
-                $scope.modalmenu.hide();
-        };
-
-
-
         $scope.createCard = function (card) {
             cards.push(card);
-            alert("lol");
         };
-
+        //=================================ACTION SHEET=================================
         $scope.show = function() {
             // Show the action sheet
             var hideSheet = $ionicActionSheet.show({
@@ -146,6 +136,31 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards'])
                 hideSheet();
             }, 20000);
 
+        };
+        //=================================Modals================================
+        $ionicModal.fromTemplateUrl('templates/new-card.html', {
+            scope: $scope,
+            animation: 'slide-in-up'
+        }).then(function (modal) {
+            $scope.modalnew = modal;
+        });
+        $ionicModal.fromTemplateUrl('templates/menu.html', {
+            scope: $scope,
+            animation: 'slide-in-up'
+        }).then(function (modal) {
+            $scope.modalmenu = modal;
+        });
+        $scope.openModal = function (id) {
+            if (id == "new")
+                $scope.modalnew.show();
+            else if (id == "menu")
+                $scope.modalmenu.show();
+        };
+        $scope.closeModal = function (id) {
+            if (id == "new")
+                $scope.modalnew.hide();
+            else if (id == "menu")
+                $scope.modalmenu.hide();
         };
     })
 

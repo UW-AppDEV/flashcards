@@ -49,23 +49,21 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards'])
         var cardTypes = [
             {
                 title: 'Swipe down to clear the card',
-                image: 'img/pic.png'
+                
             },
             {
                 title: 'Where is this?',
-                image: 'img/pic.png'
+                
             },
             {
                 title: 'What kind of grass is this?',
-                image: 'img/pic2.png'
+                
             },
             {
                 title: 'What beach is this?',
-                image: 'img/pic3.png'
             },
             {
                 title: 'What kind of clouds are these?',
-                image: 'img/pic4.png'
             }
         ];
 

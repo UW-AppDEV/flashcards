@@ -33,7 +33,6 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards'])
 
 
     .controller('CardsCtrl', function ($scope, $ionicSwipeCardDelegate, $ionicSideMenuDelegate, $ionicModal, $ionicActionSheet, $timeout) {
-
         $scope.items = [
             { id: 0 },
             { id: 1 },
@@ -92,12 +91,26 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards'])
         }).then(function (modal) {
             $scope.modalnew = modal;
         });
-        $scope.openModal = function () {
-            $scope.modalnew.show();
+        $ionicModal.fromTemplateUrl('templates/menu.html', {
+            scope: $scope,
+            animation: 'slide-in-up'
+        }).then(function (modal) {
+            $scope.modalmenu = modal;
+        });
+        $scope.openModal = function (id) {
+            if (id == "new")
+                $scope.modalnew.show();
+            else if (id == "menu")
+                $scope.modalmenu.show();
         };
-        $scope.closeModal = function () {
-            $scope.modalnew.hide();
+        $scope.closeModal = function (id) {
+            if (id == "new")
+                $scope.modalnew.hide();
+            else if (id == "menu")
+                $scope.modalmenu.hide();
         };
+
+
 
         $scope.createCard = function (card) {
             cards.push(card);
@@ -122,7 +135,7 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards'])
                 },
                 buttonClicked: function(index) {
                     if (index==0){
-                        $scope.openModal();
+                        $scope.openModal('new');
                     }
                     else if (index == 1){
                         alert("0");

@@ -49,6 +49,8 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils'])
          Card Structure: IMPORTANT
          set -> cards -> card
          */
+        $scope.currentCategory = 'default';
+        
         $scope.data = [
             {default: 0}
         ];
@@ -61,7 +63,7 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils'])
             {title: 'What kind of clouds are these?',}
         ];
 
-        $scope.cards = Array.prototype.slice.call($scope.data.default, 0, 0);
+        $scope.cards = Array.prototype.slice.call($scope.data[$scope.currentCategory], 0, 0);
 
         $scope.cardSwiped = function (index) {
             $scope.addCard();
@@ -72,7 +74,7 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils'])
         };
 
         $scope.addCard = function () {
-            var newCard = $scope.data.default[Math.floor(Math.random() * $scope.data.default.length)];
+            var newCard = $scope.data[$scope.currentCategory][Math.floor(Math.random() * $scope.data[$scope.currentCategory].length)];
             newCard.id = Math.random();
             $scope.cards.push(angular.extend({}, newCard));
         }
@@ -129,10 +131,12 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils'])
             $scope.modalmenu = modal;
         });
         $scope.openModal = function (id) {
-            if (id == "new")
+            if (id == "new"){
                 $scope.modalnew.show();
-            else if (id == "menu")
+            }
+            else if (id == "menu") {
                 $scope.modalmenu.show();
+            }
         };
         $scope.closeModal = function (id) {
             if (id == "new")

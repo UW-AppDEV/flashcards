@@ -86,7 +86,7 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils'])
                     {text: '<b>New</b>'},
                     {text: 'Edit'},
                     {text: 'Move'},
-                    {text: 'Hide All'}
+                    {text: $scope.showContent?'Hide All':'Show All'}
                 ],
                 destructiveText: 'Delete',
                 titleText: 'Edit',
@@ -105,17 +105,14 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils'])
                         alert("0");
                     }
                     else if (index == 3) {
-                        alert("0");
+                        $scope.showContent = !$scope.showContent;
                     }
                     return true;
                 }
             });
-
-            // For example's sake, hide the sheet after two seconds
             $timeout(function () {
                 hideSheet();
             }, 20000);
-
         };
         //=================================Modals================================
         $ionicModal.fromTemplateUrl('templates/new-card.html', {
@@ -152,7 +149,7 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils'])
             card.swipe();
         };
     })
-    .controller('MenuCtrl', function ($scope) {
+    .controller('EditCtrl', function ($scope) {
 
     })
 ;

@@ -46,7 +46,6 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils'])
             {title: 'What beach is this?',},
             {title: 'What kind of clouds are these?',}
         ];
-
         $scope.cards = Array.prototype.slice.call($scope.data[$scope.current.category], 0, 0);
 
         $scope.cardSwiped = function (index) {

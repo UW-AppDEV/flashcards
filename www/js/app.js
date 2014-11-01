@@ -49,11 +49,12 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils'])
          Card Structure: IMPORTANT
          set -> cards -> card
          */
-        $scope.currentCategory = 'default';
+        $scope.current = [{}];
+        $scope.current.category = 'default';
+        $scope.current.cardindex = 0;
+
         $scope.showContent = true;
-        $scope.data = [
-            {default: 0}
-        ];
+        $scope.data = [{}];
 
         $scope.data.default = [
             {title: 'Swipe down to clear the card', },
@@ -63,7 +64,7 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils'])
             {title: 'What kind of clouds are these?',}
         ];
 
-        $scope.cards = Array.prototype.slice.call($scope.data[$scope.currentCategory], 0, 0);
+        $scope.cards = Array.prototype.slice.call($scope.data[$scope.current.category], 0, 0);
 
         $scope.cardSwiped = function (index) {
             $scope.addCard();
@@ -74,7 +75,8 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils'])
         };
 
         $scope.addCard = function () {
-            var newCard = $scope.data[$scope.currentCategory][Math.floor(Math.random() * $scope.data[$scope.currentCategory].length)];
+            $scope.current.cardindex = Math.floor(Math.random() * $scope.data[$scope.current.category].length);
+            var newCard = $scope.data[$scope.current.category][$scope.current.cardindex];
             newCard.id = Math.random();
             $scope.cards.push(angular.extend({}, newCard));
         }
@@ -99,7 +101,7 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils'])
                         $scope.openModal('new');
                     }
                     else if (index == 1) {
-                        alert("0");
+                        $scope.openModal('new');
                     }
                     else if (index == 2) {
                         alert("0");

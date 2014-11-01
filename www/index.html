@@ -17,7 +17,7 @@
 <body ng-app="starter" ng-controller="CardsCtrl" no-scroll>
 <header class="bar bar-header bar-transparent">
     <button class="button button-icon ion-navicon button-dark" ng-click="openModal('menu')"></button>
-    <h1 class="title">{{data[currentCategory].title}}</h1>
+    <h1 class="title">{{current.category}}</h1>
     <!-- New Task button-->
     <button class="button button-clear button-light" ng-click="show()">Edit</button>
 </header>
@@ -43,6 +43,18 @@
             </div>
         </swipe-card>
     </swipe-cards>
+    <div style="position:absolute; right:5px; bottom:5px;">
+        <table style="width:100%">
+            <tr>
+                <td>Category:</td>
+                <td>{{current.category}}</td>
+            </tr>
+            <tr>
+                <td>Card:</td>
+                <td>{{current.cardindex}}</td>
+            </tr>
+        </table>
+    </div>
 </ion-pane>
 </body>
 

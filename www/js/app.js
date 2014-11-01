@@ -1,20 +1,5 @@
 angular.module('ionic.utils', [])
-    .factory('$localstorage', ['$window', function ($window) {
-        return {
-            set: function (key, value) {
-                $window.localStorage[key] = value;
-            },
-            get: function (key, defaultValue) {
-                return $window.localStorage[key] || defaultValue;
-            },
-            setObject: function (key, value) {
-                $window.localStorage[key] = JSON.stringify(value);
-            },
-            getObject: function (key, defaultValue) {
-                return JSON.parse($window.localStorage[key] || JSON.stringify(defaultValue));
-            }
-        }
-    }]);
+
 angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils'])
 
     .run(function ($ionicPlatform, $localstorage) {
@@ -44,22 +29,13 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils'])
     })
 
 
-    .controller('CardsCtrl', function ($scope, $ionicSwipeCardDelegate, $ionicSideMenuDelegate, $ionicModal, $ionicActionSheet, $timeout, $localstorage) {
+    .controller('CardsCtrl', function ($scope,Data,$ionicSwipeCardDelegate, $ionicSideMenuDelegate, $ionicModal, $ionicActionSheet, $timeout, $localstorage) {
         /*
          Card Structure: IMPORTANT
          set -> cards -> card
          */
-        $scope.data = [
-            {default: 0}
-        ];
-
-        $scope.data.default = [
-            {title: 'Swipe down to clear the card',},
-            {title: 'Where is this?',},
-            {title: 'What kind of grass is this?',},
-            {title: 'What beach is this?',},
-            {title: 'What kind of clouds are these?',}
-        ];
+        $scope.data=Data.data;
+        $scope.data.default=Data.data.default;
 
         $scope.cards = Array.prototype.slice.call($scope.data.default, 0, 0);
 

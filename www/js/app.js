@@ -1,3 +1,20 @@
+angular.module('ionic.utils', [])
+    .factory('$localstorage', ['$window', function ($window) {
+        return {
+            set: function (key, value) {
+                $window.localStorage[key] = value;
+            },
+            get: function (key, defaultValue) {
+                return $window.localStorage[key] || defaultValue;
+            },
+            setObject: function (key, value) {
+                $window.localStorage[key] = JSON.stringify(value);
+            },
+            getObject: function (key, defaultValue) {
+                return JSON.parse($window.localStorage[key] || JSON.stringify(defaultValue));
+            }
+        }
+    }]);
 angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils'])
 
     .run(function ($ionicPlatform, $localstorage) {
@@ -46,6 +63,7 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils'])
             {title: 'What beach is this?',},
             {title: 'What kind of clouds are these?',}
         ];
+
         $scope.cards = Array.prototype.slice.call($scope.data[$scope.current.category], 0, 0);
 
         $scope.cardSwiped = function (index) {

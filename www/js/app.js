@@ -50,14 +50,13 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils'])
          set -> cards -> card
          */
         $scope.currentCategory = 'default';
-        $scope.test = $localstorage.get('currentCategory', 2);
-        $localstorage.set ('currentCategory', $scope.test);
+        $scope.showContent = true;
         $scope.data = [
             {default: 0}
         ];
 
         $scope.data.default = [
-            {title: 'Swipe down to clear the card',},
+            {title: 'Swipe down to clear the card', },
             {title: 'Where is this?',},
             {title: 'What kind of grass is this?',},
             {title: 'What beach is this?',},

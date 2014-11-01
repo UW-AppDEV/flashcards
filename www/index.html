@@ -29,11 +29,16 @@
         </swipe-card>
         <swipe-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-card-swipe="cardSwiped($index)">
             <div ng-controller="CardCtrl">
-                <div class="title">
-                {{card.title}}
-            </div>
-                <div class="image">
-                    <img ng-src="{{card.image}}">
+                <div ng-show="not(showContent)">
+                    <h1>&nbsp</h1>
+                    <h1>&nbsp</h1>
+                    <h1 align="center">lol</h1>
+                </div>
+                <div class="title" ng-show="showContent">
+                    <h3>{{card.title}}</h3>
+                </div>
+                <div class="title" ng-show="showContent">
+                    {{card.text}}
                 </div>
             </div>
         </swipe-card>

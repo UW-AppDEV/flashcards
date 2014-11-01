@@ -1,3 +1,4 @@
+var test = 55;
 angular.module('ionic.utils', [])
     .factory('$localstorage', ['$window', function ($window) {
         return {
@@ -45,23 +46,22 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils'])
 
 
     .controller('CardsCtrl', function ($scope, $ionicSwipeCardDelegate, $ionicSideMenuDelegate, $ionicModal, $ionicActionSheet, $timeout, $localstorage) {
-        /*
-         Card Structure: IMPORTANT
-         set -> cards -> card
-         */
+        //=============================Actual Cards Stuff =================================
         $scope.current = [{}];
         $scope.current.category = 'default';
         $scope.current.cardindex = 0;
+
+        $scope.edit = [{}];
 
         $scope.showContent = true;
         $scope.data = [{}];
 
         $scope.data.default = [
-            {title: 'Swipe down to clear the card', },
-            {title: 'Where is this?',},
-            {title: 'What kind of grass is this?',},
-            {title: 'What beach is this?',},
-            {title: 'What kind of clouds are these?',}
+            {title: 'Swipe down to clear the card', text: '123'},
+            {title: 'Where is this?',  text: '123'},
+            {title: 'What kind of grass is this?',  text: '123'},
+            {title: 'What beach is this?',  text: '123'},
+            {title: 'What kind of clouds are these?',  text: '123'}
         ];
 
         $scope.cards = Array.prototype.slice.call($scope.data[$scope.current.category], 0, 0);
@@ -101,7 +101,8 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils'])
                         $scope.openModal('new');
                     }
                     else if (index == 1) {
-                        $scope.openModal('new');
+                        $scope.editstart($scope.current.category, $scope.current.cardindex);
+                        $scope.openModal('edit');
                     }
                     else if (index == 2) {
                         alert("0");
@@ -123,6 +124,12 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils'])
         }).then(function (modal) {
             $scope.modalnew = modal;
         });
+        $ionicModal.fromTemplateUrl('templates/edit-card.html', {
+            scope: $scope,
+            animation: 'slide-in-up'
+        }).then(function (modal) {
+            $scope.modaledit = modal;
+        });
         $ionicModal.fromTemplateUrl('templates/menu.html', {
             scope: $scope,
             animation: 'slide-in-up'
@@ -136,12 +143,29 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils'])
             else if (id == "menu") {
                 $scope.modalmenu.show();
             }
+            else if (id == "edit") {
+                $scope.modaledit.show();
+            }
         };
         $scope.closeModal = function (id) {
             if (id == "new")
                 $scope.modalnew.hide();
             else if (id == "menu")
                 $scope.modalmenu.hide();
+            else if (id == "edit") {
+                $scope.modaledit.hide();
+            }
+        };
+        //=========================Edit Panel=================================
+        $scope.editstart = function (category, index) {
+            $scope.edit.title = $scope.data[category][index].title;
+            $scope.edit.text = $scope.data[category][index].text;
+            alert($scope.edit.title);
+        };
+        $scope.edit = function () {
+            $scope.data[$scope.current.category][$scope.current.cardindex].title = $scope.edit.title;
+            $scope.data[$scope.current.category][$scope.current.cardindex].text = $scope.edit.text;
+            $scope.closeModal ('edit');
         };
     })
 
@@ -151,13 +175,6 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils'])
             card.swipe();
         };
     })
-    .controller('NewCtrl', function ($scope) {
-        $scope.card.title = "";
-        $scope.card.text = "";
-    })
-    .controller('EditCtrl', function ($scope) {
-        $scope.card.title = "";
-        $scope.card.text = "";
-    })
+
 ;
 

@@ -1,0 +1,26 @@
+<ion-modal-view ng-controller="EditCtrl">
+    <!-- Modal header bar -->
+    <ion-header-bar class="bar bar-header bar-positive">
+        <h1 class="title">New Card</h1>
+        <button class="button button-clear button-primary" ng-click="closeModal('new')">Cancel</button>
+    </ion-header-bar>
+
+    <!-- Modal content area -->
+    <ion-content class="padding">
+        <form ng-submit="createCard(card)">
+            <div class="list">
+                <label class="item item-input">
+                    <input type="text" placeholder="Card Title" ng-model="">
+                </label>
+                <label class="item item-input">
+                    <textarea ng-model="card.content" placeholder="enter your content here..."></textarea>
+                </label>
+            </div>
+            <div class="padding">
+                <button type="submit" class="button button-block button-positive">Create Card</button>
+            </div>
+        </form>
+
+    </ion-content>
+
+</ion-modal-view>

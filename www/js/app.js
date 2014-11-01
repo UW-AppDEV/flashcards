@@ -151,8 +151,13 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils'])
             card.swipe();
         };
     })
+    .controller('NewCtrl', function ($scope) {
+        $scope.card.title = "";
+        $scope.card.text = "";
+    })
     .controller('EditCtrl', function ($scope) {
-
+        $scope.card.title = "";
+        $scope.card.text = "";
     })
 ;
 

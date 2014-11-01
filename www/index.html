@@ -30,8 +30,8 @@
         <swipe-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-card-swipe="cardSwiped($index)">
             <div ng-controller="CardCtrl">
                 <div class="title">
-                    {{card.title}}
-                </div>
+                {{card.title}}
+            </div>
                 <div class="image">
                     <img ng-src="{{card.image}}">
                 </div>

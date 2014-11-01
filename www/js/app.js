@@ -50,7 +50,8 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils'])
          set -> cards -> card
          */
         $scope.currentCategory = 'default';
-        
+        $scope.test = $localstorage.get('currentCategory', 2);
+        $localstorage.set ('currentCategory', $scope.test);
         $scope.data = [
             {default: 0}
         ];

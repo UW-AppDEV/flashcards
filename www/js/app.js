@@ -230,12 +230,11 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils',])
         };
         //=========================Edit Panel=================================
         $scope.editstart = function (category, index) {
-            $scope.edit.title = $scope.data[category][index].title;
-            $scope.edit.text = $scope.data[category][index].text;
+            $scope.edit = $scope.data[category][index];
+            alert("it runs");
         };
-        $scope.edit = function () {
-            $scope.data[$scope.current.category][$scope.current.cardindex].title = $scope.edit.title;
-            $scope.data[$scope.current.category][$scope.current.cardindex].text = $scope.edit.text;
+        $scope.editsave = function () {
+            $scope.data[$scope.current.category][$scope.current.cardindex] = $scope.edit;
             $scope.updatecardview({title:$scope.edit.title, text:$scope.edit.text}, $scope.current.cardindex);
             $scope.closeModal ('edit');
         };
@@ -247,7 +246,6 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils',])
         $scope.new = function () {
             $scope.data[$scope.current.category].splice($scope.current.cardindex+1, 0, {title:$scope.edit.title, text:$scope.edit.text});
             $scope.updatecardview({title:$scope.edit.title, text:$scope.edit.text}, $scope.current.cardindex+1);
-            alert($scope.edit.title);
             $scope.closeModal ('new');
         };
     })

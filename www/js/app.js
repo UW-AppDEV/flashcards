@@ -1,4 +1,3 @@
-var test = 55;
 angular.module('ionic.utils', [])
     .factory('$localstorage', ['$window', function ($window) {
         return {
@@ -43,27 +42,23 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils',])
             }
         }
     })
-
+/*
     .factory('Data',function($localstorage){
         var Data=
         {
-
             "Math 137": [
                 {title:"Limit",text:"a limit is...."},
                 {title:"Continuity",text:"continuity means ..."}
             ],
-
             "Math 135":[
                 {title:"GCDOO",text:"Let a= ...."},
                 {title:"Fermat's little Theorem",text:"if p is a prime..."}],
 
-
-            'demo':[{title: 'Swipe down to clear the card',text:''},
+            'Demo':[{title: 'Swipe down to clear the card',text:''},
                 {title: 'Where is this?',text:''},
                 {title: 'What kind of grass is this?',text:''},
                 {title: 'What beach is this?',text:''},
                 {title: 'What kind of clouds are these?',text:''}]
-
         };
 
         var saveData=function(){
@@ -105,37 +100,53 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils',])
                 }
             }
         };
-    })
-    .controller('CardsCtrl', function ($scope,Data, $ionicSwipeCardDelegate, $ionicSideMenuDelegate, $ionicModal, $ionicActionSheet, $timeout, $localstorage) {
+    })*/
+    .controller('CardsCtrl', function ($scope, $ionicSwipeCardDelegate, $ionicSideMenuDelegate, $ionicModal, $ionicActionSheet, $timeout, $localstorage) {
         //=============================Actual Cards Stuff =================================
-        $scope.current = [{}];
-        $scope.current.category = 'default';
-        $scope.current.cardindex = 0;
-
+        $scope.current = $localstorage.getObject ('current', {category: 'Demo', cardindex: 0, random: false});
+        $scope.showContent = true;
         $scope.edit = [{}];
 
-        $scope.showContent = true;
-        $scope.data={};
-        $scope.data.default = [
-            {title: 'Swipe down to clear the card', text: '123'},
-            {title: 'Where is this?',  text: '123'},
-            {title: 'What kind of grass is this?',  text: '123'},
-            {title: 'What beach is this?',  text: '123'},
-            {title: 'What kind of clouds are these?',  text: '123'}
-        ];
-        $scope.data.default=Data.all()['Math 135'];
+        $scope.data = $localstorage.getObject ('data',{
+                "Math 137": [
+                    {title:"Limit",text:"a limit is...."},
+                    {title:"Continuity",text:"continuity means ..."}
+                ],
+                "Math 135":[
+                    {title:"GCDOO",text:"Let a= ...."},
+                    {title:"Fermat's little Theorem",text:"if p is a prime..."}
+                ],
+                'Demo':[
+                    {title: 'Swipe down to clear the card',text:''},
+                    {title: 'Where is this?',text:''},
+                    {title: 'What kind of grass is this?',text:''},
+                    {title: 'What beach is this?',text:''},
+                    {title: 'What kind of clouds are these?',text:''}
+                ],
+            });
+        //$scope.data.default=Data.all()['Demo'];
+
+        //====================================Cardswiper================================
         $scope.cards = Array.prototype.slice.call($scope.data[$scope.current.category], 0, 0);
 
         $scope.cardSwiped = function (index) {
             $scope.addCard();
         };
-
         $scope.cardDestroyed = function (index) {
             $scope.cards.splice(index, 1);
         };
-
+        $scope.updatecardview = function(title, text, index){
+            $scope.cards[0] = {title:title, text:text};
+            $scope.current.cardindex = index;
+        };
         $scope.addCard = function () {
-            $scope.current.cardindex = Math.floor(Math.random() * $scope.data[$scope.current.category].length);
+            if ($scope.current.random)
+                $scope.current.cardindex = Math.floor(Math.random() * $scope.data[$scope.current.category].length);
+            else
+            {
+                $scope.current.cardindex++;
+                $scope.current.cardindex = $scope.current.cardindex % $scope.data[$scope.current.category].length;
+            }
             var newCard = $scope.data[$scope.current.category][$scope.current.cardindex];
             newCard.id = Math.random();
             $scope.cards.push(angular.extend({}, newCard));
@@ -158,6 +169,7 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils',])
                 },
                 buttonClicked: function (index) {
                     if (index == 0) {
+                        $scope.newstart($scope.current.category, $scope.current.cardindex);
                         $scope.openModal('new');
                     }
                     else if (index == 1) {
@@ -220,12 +232,21 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils',])
         $scope.editstart = function (category, index) {
             $scope.edit.title = $scope.data[category][index].title;
             $scope.edit.text = $scope.data[category][index].text;
-            alert($scope.edit.title);
         };
         $scope.edit = function () {
             $scope.data[$scope.current.category][$scope.current.cardindex].title = $scope.edit.title;
             $scope.data[$scope.current.category][$scope.current.cardindex].text = $scope.edit.text;
             $scope.closeModal ('edit');
+        };
+        //=========================Edit Panel=================================
+        $scope.newstart = function (category, index) {
+            $scope.edit.title = "";
+            $scope.edit.text = "";
+        };
+        $scope.new = function () {
+            $scope.data[$scope.current.category].splice($scope.current.cardindex+1, 0, {title:$scope.edit.title, text:$scope.edit.text});
+            $scope.updatecardview($scope.edit.title, $scope.edit.text, $scope.current.cardindex+1);
+            $scope.closeModal ('new');
         };
     })
 

@@ -7,19 +7,17 @@
 
     <!-- Modal content area -->
     <ion-content class="padding">
-        <form ng-submit="createCard(card)">
-            <div class="list">
-                <label class="item item-input">
-                    <input type="text" placeholder="Card Title" ng-model="card.title">
-                </label>
-                <label class="item item-input">
-                    <textarea ng-model="card.text" placeholder="enter your content here..."></textarea>
-                </label>
-            </div>
-            <div class="padding">
-                <button type="submit" class="button button-block button-positive">Create Card</button>
-            </div>
-        </form>
+        <div class="list">
+            <label class="item item-input">
+                <input type="text" placeholder="Card Title" ng-model="new.title">
+            </label>
+            <label class="item item-input">
+                <textarea ng-model="new.text" placeholder="enter your content here..."></textarea>
+            </label>
+        </div>
+        <div class="padding">
+            <button class="button button-block button-positive" ng-click="new()">Create</button>
+        </div>
 
     </ion-content>
 

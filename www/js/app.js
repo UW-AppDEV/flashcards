@@ -135,8 +135,8 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils',])
         $scope.cardDestroyed = function (index) {
             $scope.cards.splice(index, 1);
         };
-        $scope.updatecardview = function(title, text, index){
-            $scope.cards[0] = {title:title, text:text};
+        $scope.updatecardview = function(card, index){
+            $scope.cards[0] = card;
             $scope.current.cardindex = index;
         };
         $scope.addCard = function () {
@@ -236,6 +236,7 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils',])
         $scope.edit = function () {
             $scope.data[$scope.current.category][$scope.current.cardindex].title = $scope.edit.title;
             $scope.data[$scope.current.category][$scope.current.cardindex].text = $scope.edit.text;
+            $scope.updatecardview({title:$scope.edit.title, text:$scope.edit.text}, $scope.current.cardindex);
             $scope.closeModal ('edit');
         };
         //=========================Edit Panel=================================
@@ -245,7 +246,8 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils',])
         };
         $scope.new = function () {
             $scope.data[$scope.current.category].splice($scope.current.cardindex+1, 0, {title:$scope.edit.title, text:$scope.edit.text});
-            $scope.updatecardview($scope.edit.title, $scope.edit.text, $scope.current.cardindex+1);
+            $scope.updatecardview({title:$scope.edit.title, text:$scope.edit.text}, $scope.current.cardindex+1);
+            alert($scope.edit.title);
             $scope.closeModal ('new');
         };
     })

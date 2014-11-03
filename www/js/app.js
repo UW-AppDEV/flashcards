@@ -101,7 +101,7 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils',])
             }
         };
     })*/
-    .controller('CardsCtrl', function ($scope, $ionicSwipeCardDelegate, $ionicSideMenuDelegate, $ionicModal, $ionicActionSheet, $timeout, $localstorage) {
+    .controller('CardsCtrl', function ($scope, $ionicSwipeCardDelegate, $ionicModal, $ionicActionSheet, $timeout, $localstorage) {
         //=============================Actual Cards Stuff =================================
         $scope.current = $localstorage.getObject ('current', {category: 'Demo', cardindex: 0, random: true});
         $scope.showContent = true;
@@ -264,10 +264,9 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils',])
         };
         //=========================Edit Panel=================================
         $scope.newstart = function (category, index) {
-            $scope.edit.title = "";
-            $scope.edit.text = "";
+            $scope.edit = {title:"",text:""};
         };
-        $scope.new = function () {
+        $scope.newsave = function () {
             $scope.data[$scope.current.category].splice($scope.current.cardindex+1, 0, {title:$scope.edit.title, text:$scope.edit.text});
             $scope.updatecardview({title:$scope.edit.title, text:$scope.edit.text}, $scope.current.cardindex+1);
             $scope.closeModal ('new');
@@ -280,5 +279,6 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils',])
             card.swipe();
         };
     })
+
 
 ;

@@ -7,20 +7,22 @@
     <title></title>
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <link href="css/ionic.contrib.frostedGlass.css" rel="stylesheet">
     <script src="lib/ionic/js/ionic.bundle.js"></script>
     <script src="cordova.js"></script>
 
     <script src="js/app.js"></script>
     <script src="js/ionic.swipecards.js"></script>
+    <script src="js/ionic.contrib.frostedGlass.js"></script>
 </head>
 
 <body ng-app="starter" ng-controller="CardsCtrl" no-scroll>
-<header class="bar bar-header bar-transparent">
+<ion-header-bar class="bar bar-header bar-transparent">
     <button class="button button-icon ion-navicon button-dark" ng-click="openModal('menu')"></button>
     <h1 class="title">{{current.category}}</h1>
     <!-- New Task button-->
     <button class="button button-clear button-light" ng-click="show()">Edit</button>
-</header>
+</ion-header-bar>
 <ion-pane>
 
     <swipe-cards>

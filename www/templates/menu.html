@@ -1,47 +1,57 @@
 <ion-modal-view>
     <!-- Modal header bar -->
     <ion-header-bar class="bar bar-header bar-positive">
-        <button class="button button-icon icon ion-settings"></button>
+        <button class="button button-icon icon ion-ios7-plus"></button>
         <h1 class="title">Menu</h1>
         <button class="button button-clear button-primary" ng-click="closeModal('menu')">Cancel</button>
     </ion-header-bar>
 
     <!--Modal content area-->
-    <ion-content>
-        <div class="list">
-            <div class="item item-divider">
-                Candy Bars
-            </div>
-            <a class="item" href="#">
-                Butterfinger
-            </a>
-            <a class="item" href="#">
-                Butterfinger
-            </a>
-            <a class="item" href="#">
-                Butterfinger
-            </a>
-            <a class="item" href="#">
-                Butterfinger
-            </a>
-            <a class="item" href="#">
-                Butterfinger
-            </a>
-            <a class="item" href="#">
-                Butterfinger
-            </a>
-            <a class="item" href="#">
-                Butterfinger
-            </a>
-            <a class="item" href="#">
-                Butterfinger
-            </a>
-            <a class="item" href="#">
-                Butterfinger
-            </a>
-            <a class="item" href="#">
-                Butterfinger
-            </a>
-        </div>
+    <ion-content style="height:61.6%">
+        <ion-list can-swipe="true">
+            <ion-item ng-repeat="(key, prop) in data track by key" ng-class="{active: current.category == key}"
+                      ng-click="alert('why');">
+                {{key}}
+                <ion-option-button class="button-positive" ng-click="alert('lol')">
+                    Share
+                </ion-option-button>
+                <ion-option-button class="button-info" ng-click="alert('lol')">
+                    Edit
+                </ion-option-button>
+            </ion-item>
+        </ion-list>
     </ion-content>
+    <div class="bar bar-footer bar-balanced" style="height:30%">
+        <ion-pane class="balanced">
+            <div class="row">
+                <div class="col col-50">
+                    <button class="button button-outline button-positive" style="width:100%">Outlined Button</button>
+                </div>
+                <div class="col">
+                    <button class="button button-outline button-positive" style="width:100%">Outlined Button</button>
+                </div>
+                <div class="col">
+                    <button class="button button-outline button-positive" style="width:100%">Outlined Button</button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-75">
+                    <button class="button button-outline button-positive" style="width:100%">Outlined Button</button>
+                </div>
+                <div class="col">
+                    <button class="button button-outline button-positive" style="width:100%">Outlined Button</button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <button class="button button-outline button-positive" style="width:100%">Outlined Button</button>
+                </div>
+                <div class="col col-75">
+                    <button class="button button-outline button-positive" style="width:100%">Outlined Button</button>
+                </div>
+            </div>
+        </ion-pane>
+    </div>
 </ion-modal-view>

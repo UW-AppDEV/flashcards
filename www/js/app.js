@@ -123,14 +123,34 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils',])
                     {title: 'What beach is this?',text:''},
                     {title: 'What kind of clouds are these?',text:''}
                 ],
-            });
-        //$scope.data.default=Data.all()['Demo'];
+            "filler": [],
+            "filler2": [],
+            "filler3": [],
+            "filler4": [],
+            "filler5": [],
+            "filler6": [],
+        });
+        $scope.nav = $localstorage.getObject('nav', {
+            "Math 137": {cardindex: 0, cardindexprev: 0, random: true},
+            "Math 135": {cardindex: 0, cardindexprev: 0, random: true},
+            "Demo": {cardindex: 0, cardindexprev: 0, random: false}
+        });
+        //===============================Switching Category============================
+        $scope.swtichCategory = function (category) {
+            //put nav variables in current
+            $scope.current.category = category;
+            $scope.current.cardindex = $scope.nav.category.cardindex;
+            $scope.current.cardindexprev = $scope.nav.category.cardindexprev;
+            $scope.current.random = $scope.nav.category.random;
+            //update view
+            $scope.updatecardview($scope.current.category, $scope.current.cardindex);
+        };
 
         //====================================Cardswiper================================
         $scope.cards = Array.prototype.slice.call($scope.data[$scope.current.category], 0, 0);
-		
+
 		$scope.randomCardPool = []; //random card pool to select next card from
-		
+
 		//generates array of elements 0 to n-1
 		$scope.resetRandomCardPool = function(n) {
 			$scope.randomCardPool = [];
@@ -145,31 +165,33 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils',])
         $scope.cardDestroyed = function (index) {
             $scope.cards.splice(index, 1);
         };
-        $scope.updatecardview = function(card, index){
-            $scope.cards[0] = card;
+        $scope.updatecardview = function (category, index) {
+            $scope.cards[0] = $scope.data[category][index];
+            $scope.current.category = category;
             $scope.current.cardindex = index;
         };
         $scope.addCard = function () {
+            //previous card index (for when items are deleted)
+            $scope.current.cardindexprev = $scope.current.cardindex;
             if ($scope.current.random) {
-			
+
 				//if highest card index in random card pool is higher than category length, generate new random card pool
 				if ((Math.max.apply(Math, $scope.randomCardPool) > $scope.data[$scope.current.category].length - 1) || ($scope.randomCardPool.length <= 0)) {
 					$scope.resetRandomCardPool($scope.data[$scope.current.category].length);
 				}
-				
+
 				var randomindex = Math.floor(Math.random() * $scope.randomCardPool.length);
-				
+
 				//sets random index and removes this index from random pool
 				$scope.current.cardindex = $scope.randomCardPool[randomindex];
 				$scope.randomCardPool.splice(randomindex, 1);
-				
-				//pure random algorithm
+
+                //pure random algorithm
                 //$scope.current.cardindex = Math.floor((Math.random() * $scope.data[$scope.current.category].length));
 			}
             else
             {
-                $scope.current.cardindex++;
-                $scope.current.cardindex = $scope.current.cardindex % $scope.data[$scope.current.category].length;
+                $scope.current.cardindex = ($scope.current.cardindex++) % $scope.data[$scope.current.category].length;
             }
             var newCard = $scope.data[$scope.current.category][$scope.current.cardindex];
             newCard.id = Math.random();
@@ -179,18 +201,13 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils',])
         $scope.show = function () {
             // Show the action sheet
             var hideSheet = $ionicActionSheet.show({
+                titleText: 'Edit',
                 buttons: [
                     {text: '<b>New</b>'},
                     {text: 'Edit'},
                     {text: 'Move'},
                     {text: $scope.showContent?'Hide All':'Show All'}
                 ],
-                destructiveText: 'Delete',
-                titleText: 'Edit',
-                cancelText: 'Cancel',
-                cancel: function () {
-                    // add cancel code..
-                },
                 buttonClicked: function (index) {
                     if (index == 0) {
                         $scope.newstart($scope.current.category, $scope.current.cardindex);
@@ -206,6 +223,17 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils',])
                     else if (index == 3) {
                         $scope.showContent = !$scope.showContent;
                     }
+                    return true;
+                },
+                cancelText: 'Cancel',
+                cancel: function () {
+                },
+                destructiveText: 'Delete',
+                destructiveButtonClicked: function () {
+                    //remove card
+                    $scope.data[$scope.current.category].splice($scope.current.cardindex, 1);
+                    //update view to previous card
+                    $scope.updatecardview($scope.current.category, $scope.current.cardindexprev);
                     return true;
                 }
             });
@@ -255,11 +283,10 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils',])
         //=========================Edit Panel=================================
         $scope.editstart = function (category, index) {
             $scope.edit = $scope.data[category][index];
-            alert("it runs");
         };
         $scope.editsave = function () {
             $scope.data[$scope.current.category][$scope.current.cardindex] = $scope.edit;
-            $scope.updatecardview({title:$scope.edit.title, text:$scope.edit.text}, $scope.current.cardindex);
+            $scope.updatecardview($scope.current.category, $scope.current.cardindex);
             $scope.closeModal ('edit');
         };
         //=========================Edit Panel=================================
@@ -268,7 +295,7 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils',])
         };
         $scope.newsave = function () {
             $scope.data[$scope.current.category].splice($scope.current.cardindex+1, 0, {title:$scope.edit.title, text:$scope.edit.text});
-            $scope.updatecardview({title:$scope.edit.title, text:$scope.edit.text}, $scope.current.cardindex+1);
+            $scope.updatecardview($scope.current.category, $scope.current.cardindex + 1);
             $scope.closeModal ('new');
         };
     })

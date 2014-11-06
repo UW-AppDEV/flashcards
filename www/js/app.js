@@ -106,7 +106,9 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils',])
         $scope.current = $localstorage.getObject ('current', {category: 'Demo', cardindex: 0, random: true});
         $scope.showContent = true;
         $scope.edit = [{}];
-
+        $scope.alert = function (string) {
+            alert(string);
+        };
         $scope.data = $localstorage.getObject ('data',{
                 "Math 137": [
                     {title:"Limit",text:"a limit is...."},

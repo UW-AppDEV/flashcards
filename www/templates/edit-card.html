@@ -1,0 +1,24 @@
+<ion-modal-view>
+    <!-- Modal header bar -->
+    <ion-header-bar class="bar bar-header bar-positive">
+        <h1 class="title">Edit Card</h1>
+        <button class="button button-clear button-primary" ng-click="closeModal('edit')">Cancel</button>
+    </ion-header-bar>
+
+    <!-- Modal content area -->
+    <ion-content class="padding">
+            <div class="list">
+                <label class="item item-input">
+                    <input type="text" placeholder="Card Title" ng-model="edit.title">
+                </label>
+                <label class="item item-input">
+                    <textarea ng-model="edit.text" placeholder="enter your content here..."></textarea>
+                </label>
+            </div>
+            <div class="padding">
+                <button class="button button-block button-positive" ng-click="editsave()">Save Changes</button>
+            </div>
+
+    </ion-content>
+
+</ion-modal-view>

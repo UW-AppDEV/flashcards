@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../www/lib/ionic/js/angular/angular.js"></script>
+</head>
+<body ng-app="" ng-controller="dataCtrl" style="text-align:center">
+
+<input type="text" ng-model="title" style="width:200px"> <br/>
+<textarea ng-model="content"></textarea>
+<button ng-click="addCard()">Add Card</button> <br/>
+
+<textarea align="right">{{jsoned}}</textarea>
+
+<script>
+    function dataCtrl($scope){
+        var cards=[];
+        $scope.jsoned="";
+        $scope.addCard=function(){
+            cards.push({"title":$scope.title,"content":$scope.content});
+            $scope.title="";
+            $scope.content="";
+            $scope.jsoned=JSON.stringify(cards);
+
+        };
+    }
+</script>
+</body>
+</html>

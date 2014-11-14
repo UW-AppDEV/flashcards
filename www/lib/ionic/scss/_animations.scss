@@ -9,6 +9,7 @@
 $transition-duration: 250ms;
 $slide-in-up-function: cubic-bezier(.1, .7, .1, 1);
 
+
 /**
  * Keyframes
  * --------------------------------------------------
@@ -18,300 +19,169 @@ $slide-in-up-function: cubic-bezier(.1, .7, .1, 1);
 // -------------------------------
 
 @-webkit-keyframes slideInUp {
-  0% {
-    -webkit-transform: translate3d(0, 100%, 0);
-  }
-  100% {
-    -webkit-transform: translate3d(0, 0, 0);
-  }
+  0%   { -webkit-transform: translate3d(0, 100%, 0); }
+  100% { -webkit-transform: translate3d(0, 0, 0); }
 }
-
 @-moz-keyframes slideInUp {
-  0% {
-    -moz-transform: translate3d(0, 100%, 0);
-  }
-  100% {
-    -moz-transform: translate3d(0, 0, 0);
-  }
+  0%   { -moz-transform: translate3d(0, 100%, 0); }
+  100% { -moz-transform: translate3d(0, 0, 0); }
+}
+@keyframes slideInUp {
+  0%   { transform: translate3d(0, 100%, 0); }
+  100% { transform: translate3d(0, 0, 0); }
 }
 
-@keyframes slideInUp {
-  0% {
-    transform: translate3d(0, 100%, 0);
-  }
-  100% {
-    transform: translate3d(0, 0, 0);
-  }
-}
 
 // Slide Out From The Top To Bottom
 // -------------------------------
 
 @-webkit-keyframes slideOutUp {
-  0% {
-    -webkit-transform: translate3d(0, 0, 0);
-  }
-  100% {
-    -webkit-transform: translate3d(0, 100%, 0);
-  }
+  0%   { -webkit-transform: translate3d(0, 0, 0); }
+  100% { -webkit-transform: translate3d(0, 100%, 0); }
 }
-
 @-moz-keyframes slideOutUp {
-  0% {
-    -moz-transform: translate3d(0, 0, 0);
-  }
-  100% {
-    -moz-transform: translate3d(0, 100%, 0);
-  }
+  0%   { -moz-transform: translate3d(0, 0, 0); }
+  100% { -moz-transform: translate3d(0, 100%, 0); }
+}
+@keyframes slideOutUp {
+  0%   { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(0, 100%, 0); }
 }
 
-@keyframes slideOutUp {
-  0% {
-    transform: translate3d(0, 0, 0);
-  }
-  100% {
-    transform: translate3d(0, 100%, 0);
-  }
-}
 
 // Slide In From Left
 // -------------------------------
 
 @-webkit-keyframes slideInFromLeft {
-  from {
-    -webkit-transform: translate3d(-100%, 0, 0);
-  }
-  to {
-    -webkit-transform: translate3d(0, 0, 0);
-  }
+    from { -webkit-transform: translate3d(-100%, 0, 0); }
+    to { -webkit-transform: translate3d(0, 0, 0); }
 }
-
 @-moz-keyframes slideInFromLeft {
-  from {
-    -moz-transform: translateX(-100%);
-  }
-  to {
-    -moz-transform: translateX(0);
-  }
+    from { -moz-transform: translateX(-100%); }
+    to { -moz-transform: translateX(0); }
+}
+@keyframes slideInFromLeft {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
 }
 
-@keyframes slideInFromLeft {
-  from {
-    transform: translateX(-100%);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
 
 // Slide In From Right
 // -------------------------------
 
 @-webkit-keyframes slideInFromRight {
-  from {
-    -webkit-transform: translate3d(100%, 0, 0);
-  }
-  to {
-    -webkit-transform: translate3d(0, 0, 0);
-  }
+    from { -webkit-transform: translate3d(100%, 0, 0); }
+    to { -webkit-transform: translate3d(0, 0, 0); }
 }
-
 @-moz-keyframes slideInFromRight {
-  from {
-    -moz-transform: translateX(100%);
-  }
-  to {
-    -moz-transform: translateX(0);
-  }
+    from { -moz-transform: translateX(100%); }
+    to { -moz-transform: translateX(0); }
+}
+@keyframes slideInFromRight {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
 }
 
-@keyframes slideInFromRight {
-  from {
-    transform: translateX(100%);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
 
 // Slide Out To Left
 // -------------------------------
 
 @-webkit-keyframes slideOutToLeft {
-  from {
-    -webkit-transform: translate3d(0, 0, 0);
-  }
-  to {
-    -webkit-transform: translate3d(-100%, 0, 0);
-  }
+  from { -webkit-transform: translate3d(0, 0, 0); }
+  to { -webkit-transform: translate3d(-100%, 0, 0); }
 }
-
 @-moz-keyframes slideOutToLeft {
-  from {
-    -moz-transform: translateX(0);
-  }
-  to {
-    -moz-transform: translateX(-100%);
-  }
+  from { -moz-transform: translateX(0); }
+  to { -moz-transform: translateX(-100%); }
+}
+@keyframes slideOutToLeft {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
 }
 
-@keyframes slideOutToLeft {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-100%);
-  }
-}
 
 // Slide Out To Right
 // -------------------------------
 
 @-webkit-keyframes slideOutToRight {
-  from {
-    -webkit-transform: translate3d(0, 0, 0);
-  }
-  to {
-    -webkit-transform: translate3d(100%, 0, 0);
-  }
+  from { -webkit-transform: translate3d(0, 0, 0); }
+  to { -webkit-transform: translate3d(100%, 0, 0); }
 }
-
 @-moz-keyframes slideOutToRight {
-  from {
-    -moz-transform: translateX(0);
-  }
-  to {
-    -moz-transform: translateX(100%);
-  }
+  from { -moz-transform: translateX(0); }
+  to { -moz-transform: translateX(100%); }
+}
+@keyframes slideOutToRight {
+  from { transform: translateX(0); }
+  to { transform: translateX(100%); }
 }
 
-@keyframes slideOutToRight {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(100%);
-  }
-}
 
 // Fade Out
 // -------------------------------
 
 @-webkit-keyframes fadeOut {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
+  from { opacity: 1; }
+  to { opacity: 0; }
 }
-
 @-moz-keyframes fadeOut {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
 }
 
-@keyframes fadeOut {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}
 
 // Fade In
 // -------------------------------
 
 @-webkit-keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
-
 @-moz-keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
 
 // Fade Half In
 // -------------------------------
 
 @-webkit-keyframes fadeInHalf {
-  from {
-    background-color: rgba(0, 0, 0, 0);
-  }
-  to {
-    background-color: rgba(0, 0, 0, 0.5);
-  }
+  from { background-color: rgba(0,0,0,0); }
+  to { background-color: rgba(0,0,0,0.5); }
 }
-
 @-moz-keyframes fadeInHalf {
-  from {
-    background-color: rgba(0, 0, 0, 0);
-  }
-  to {
-    background-color: rgba(0, 0, 0, 0.5);
-  }
+  from { background-color: rgba(0,0,0,0); }
+  to { background-color: rgba(0,0,0,0.5); }
+}
+@keyframes fadeInHalf {
+  from { background-color: rgba(0,0,0,0); }
+  to { background-color: rgba(0,0,0,0.5); }
 }
 
-@keyframes fadeInHalf {
-  from {
-    background-color: rgba(0, 0, 0, 0);
-  }
-  to {
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-}
 
 // Fade Half Out
 // -------------------------------
 
 @-webkit-keyframes fadeOutHalf {
-  from {
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-  to {
-    background-color: rgba(0, 0, 0, 0);
-  }
+  from { background-color: rgba(0,0,0,0.5); }
+  to { background-color: rgba(0,0,0,0); }
 }
-
 @-moz-keyframes fadeOutHalf {
-  from {
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-  to {
-    background-color: rgba(0, 0, 0, 0);
-  }
+  from { background-color: rgba(0,0,0,0.5); }
+  to { background-color: rgba(0,0,0,0); }
 }
-
 @keyframes fadeOutHalf {
-  from {
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-  to {
-    background-color: rgba(0, 0, 0, 0);
-  }
+  from { background-color: rgba(0,0,0,0.5); }
+  to { background-color: rgba(0,0,0,0); }
 }
 
 // Scale Out
@@ -319,36 +189,16 @@ $slide-in-up-function: cubic-bezier(.1, .7, .1, 1);
 // -------------------------------
 
 @-webkit-keyframes scaleOut {
-  from {
-    -webkit-transform: scale(1);
-    opacity: 1;
-  }
-  to {
-    -webkit-transform: scale(0.8);
-    opacity: 0;
-  }
+  from { -webkit-transform: scale(1); opacity: 1; }
+  to { -webkit-transform: scale(0.8); opacity: 0; }
 }
-
 @-moz-keyframes scaleOut {
-  from {
-    -moz-transform: scale(1);
-    opacity: 1;
-  }
-  to {
-    -moz-transform: scale(0.8);
-    opacity: 0;
-  }
+  from { -moz-transform: scale(1); opacity: 1; }
+  to { -moz-transform: scale(0.8); opacity: 0; }
 }
-
 @keyframes scaleOut {
-  from {
-    transform: scale(1);
-    opacity: 1;
-  }
-  to {
-    transform: scale(0.8);
-    opacity: 0;
-  }
+  from { transform: scale(1); opacity: 1; }
+  to { transform: scale(0.8); opacity: 0; }
 }
 
 // Scale In
@@ -356,30 +206,16 @@ $slide-in-up-function: cubic-bezier(.1, .7, .1, 1);
 // -------------------------------
 
 @-webkit-keyframes scaleIn {
-  from {
-    -webkit-transform: scale(0);
-  }
-  to {
-    -webkit-transform: scale(1);
-  }
+  from { -webkit-transform: scale(0); }
+  to { -webkit-transform: scale(1); }
 }
-
 @-moz-keyframes scaleIn {
-  from {
-    -moz-transform: scale(0);
-  }
-  to {
-    -moz-transform: scale(1);
-  }
+  from { -moz-transform: scale(0); }
+  to { -moz-transform: scale(1); }
 }
-
 @keyframes scaleIn {
-  from {
-    transform: scale(0);
-  }
-  to {
-    transform: scale(1);
-  }
+  from { transform: scale(0); }
+  to { transform: scale(1); }
 }
 
 // Super Scale In
@@ -387,57 +223,29 @@ $slide-in-up-function: cubic-bezier(.1, .7, .1, 1);
 // -------------------------------
 
 @-webkit-keyframes superScaleIn {
-  from {
-    -webkit-transform: scale(1.2);
-    opacity: 0;
-  }
-  to {
-    -webkit-transform: scale(1);
-    opacity: 1
-  }
+  from { -webkit-transform: scale(1.2); opacity: 0; }
+  to { -webkit-transform: scale(1); opacity: 1 }
 }
-
 @-moz-keyframes superScaleIn {
-  from {
-    -moz-transform: scale(1.2);
-    opacity: 0;
-  }
-  to {
-    -moz-transform: scale(1);
-    opacity: 1;
-  }
+  from { -moz-transform: scale(1.2); opacity: 0; }
+  to { -moz-transform: scale(1); opacity: 1; }
 }
-
 @keyframes superScaleIn {
-  from {
-    transform: scale(1.2);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
+  from { transform: scale(1.2); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }
 
 // Spin
 // -------------------------------
 
 @-webkit-keyframes spin {
-  100% {
-    -webkit-transform: rotate(360deg);
-  }
+  100% { -webkit-transform: rotate(360deg); }
 }
-
 @-moz-keyframes spin {
-  100% {
-    -moz-transform: rotate(360deg);
-  }
+  100% { -moz-transform: rotate(360deg); }
 }
-
 @keyframes spin {
-  100% {
-    transform: rotate(360deg);
-  }
+  100% { transform: rotate(360deg); }
 }
 
 .no-animation {
@@ -445,7 +253,6 @@ $slide-in-up-function: cubic-bezier(.1, .7, .1, 1);
     @include transition(none);
   }
 }
-
 .noop-animation {
   > .ng-enter, &.ng-enter, > .ng-leave, &.ng-leave {
     @include transition(all cubic-bezier(0.250, 0.460, 0.450, 0.940) $transition-duration);
@@ -457,10 +264,12 @@ $slide-in-up-function: cubic-bezier(.1, .7, .1, 1);
   }
 }
 
+
 // required for Android
 .ng-animate .pane {
   position: absolute;
 }
+
 
 /**
  * Slide Left-Right, and Right-Left, each with the reserve
@@ -518,13 +327,14 @@ $slide-in-up-function: cubic-bezier(.1, .7, .1, 1);
   }
 }
 
+
 /**
  * iOS style slide left to right
  * --------------------------------------------------
  */
 $ios-timing-function: cubic-bezier(0.4, 0.6, 0.2, 1);
 $ios-transition-duration: 400ms;
-$ios-transition-box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.5);
+$ios-transition-box-shadow: 0px 0px 12px rgba(0,0,0,0.5);
 /*
 $ios-transition-box-shadow-start: -200px 0px 200px rgba(0,0,0,0), -5px 0px 5px rgba(0,0,0,0.01);
 $ios-transition-box-shadow-end: -200px 0px 200px rgba(0,0,0,0.15), -5px 0px 5px rgba(0,0,0,0.18);
@@ -565,7 +375,6 @@ $ios-transition-box-shadow-end: -200px 0px 200px rgba(0,0,0,0.15), -5px 0px 5px 
     @include translate3d(-20%, 0, 0);
   }
 }
-
 .slide-ios.reverse,
 .slide-left-right-ios7.reverse,
 .slide-right-left-ios7 {
@@ -629,7 +438,7 @@ $ios-transition-box-shadow-end: -200px 0px 200px rgba(0,0,0,0.15), -5px 0px 5px 
       opacity: 1;
     }
     > .ng-leave, &.ng-leave {
-      box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.5);
+      box-shadow: 0px 0px 12px rgba(0,0,0,0.5);
       opacity: 1;
     }
     > .ng-leave.ng-leave-active, &.ng-leave.ng-leave-active {
@@ -674,7 +483,6 @@ $full-slide-transition-duration: 400ms;
     @include translate3d(-100%, 0, 0);
   }
 }
-
 .slide-full.reverse {
   > .ng-enter, &.ng-enter, > .ng-leave, &.ng-leave {
     @include transition(all $full-slide-timing-function $full-slide-transition-duration);
@@ -703,6 +511,7 @@ $full-slide-transition-duration: 400ms;
     @include translate3d(100%, 0, 0);
   }
 }
+
 
 .fade-explode.reverse {
   > .ng-enter, &.ng-enter, > .ng-leave, &.ng-leave {
@@ -810,7 +619,7 @@ $full-slide-transition-duration: 400ms;
  * Simple slide-in animation
  */
 .slide-in-left {
-  @include translate3d(0%, 0, 0);
+  @include translate3d(0%,0,0);
   &.ng-enter, > .ng-enter {
     @include animation-name(slideInFromLeft);
     @include animation-duration($transition-duration);
@@ -825,19 +634,19 @@ $full-slide-transition-duration: 400ms;
   }
 }
 
+
 .slide-in-left-add {
-  @include translate3d(100%, 0, 0);
+  @include translate3d(100%,0,0);
   @include animation-duration($transition-duration);
   @include animation-timing-function(ease-in-out);
   @include animation-fill-mode(both);
 }
-
 .slide-in-left-add-active {
   @include animation-name(slideInFromLeft);
 }
 
 .slide-out-left {
-  @include translate3d(-100%, 0, 0);
+  @include translate3d(-100%,0,0);
   &.ng-enter, > .ng-enter {
     @include animation-name(slideOutToLeft);
     @include animation-duration($transition-duration);
@@ -856,18 +665,17 @@ $full-slide-transition-duration: 400ms;
 }
 
 .slide-out-left-add {
-  @include translate3d(0, 0, 0);
+  @include translate3d(0,0,0);
   @include animation-duration($transition-duration);
   @include animation-timing-function(ease-in-out);
   @include animation-fill-mode(both);
 }
-
 .slide-out-left-add-active {
   @include animation-name(slideOutToLeft);
 }
 
 .slide-in-right {
-  @include translate3d(0%, 0, 0);
+  @include translate3d(0%,0,0);
   &.ng-enter, > .ng-enter {
     @include animation-name(slideInFromRight);
     @include animation-duration($transition-duration);
@@ -883,18 +691,17 @@ $full-slide-transition-duration: 400ms;
 }
 
 .slide-in-right-add {
-  @include translate3d(-100%, 0, 0);
+  @include translate3d(-100%,0,0);
   @include animation-duration($transition-duration);
   @include animation-timing-function(ease-in-out);
   @include animation-fill-mode(both);
 }
-
 .slide-in-right-add-active {
   @include animation-name(slideInFromRight);
 }
 
 .slide-out-right {
-  @include translate3d(100%, 0, 0);
+  @include translate3d(100%,0,0);
   &.ng-enter, > .ng-enter {
     @include animation-name(slideOutToRight);
     @include animation-duration($transition-duration);
@@ -910,15 +717,15 @@ $full-slide-transition-duration: 400ms;
 }
 
 .slide-out-right-add {
-  @include translate3d(0, 0, 0);
+  @include translate3d(0,0,0);
   @include animation-duration($transition-duration);
   @include animation-timing-function(ease-in-out);
   @include animation-fill-mode(both);
 }
-
 .slide-out-right-add-active {
   @include animation-name(slideOutToRight);
 }
+
 
 /**
  * Slide up from the bottom, used for modals
@@ -928,12 +735,10 @@ $full-slide-transition-duration: 400ms;
 .slide-in-up {
   @include translate3d(0, 100%, 0);
 }
-
 .slide-in-up.ng-enter,
 .slide-in-up > .ng-enter {
   @include transition(all $slide-in-up-function 400ms);
 }
-
 .slide-in-up.ng-enter-active,
 .slide-in-up > .ng-enter-active {
   @include translate3d(0, 0, 0);
@@ -943,6 +748,7 @@ $full-slide-transition-duration: 400ms;
 .slide-in-up > .ng-leave {
   @include transition(all ease-in-out 250ms);
 }
+
 
 .fade-in {
   @include animation(fadeOut 0.3s);
@@ -960,6 +766,8 @@ $full-slide-transition-duration: 400ms;
     display: none;
   }
 }
+
+
 
 /**
  * Some component specific animations
@@ -1032,6 +840,7 @@ $nav-title-slide-ios-delay: $ios-transition-duration;
   }
 }
 
+
 /**
  * Some component specific animations
  */
@@ -1101,6 +910,7 @@ $nav-title-slide-full-duration: $full-slide-transition-duration;
     }
   }
 }
+
 
 $nav-title-android-delay: 200ms;
 $nav-title-android-timing-function: linear;

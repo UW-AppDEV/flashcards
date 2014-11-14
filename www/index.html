@@ -29,28 +29,25 @@
 
     <swipe-cards>
 
-        <swipe-card on-card-swipe="cardSwiped()" id="start-card">
-            Swipe down for a new card
-        </swipe-card>
-        <swipe-card class="front" ng-repeat="card in cards" on-destroy="cardDestroyed($index)"
-                    on-card-swipe="cardSwiped($index)">
+                    <swipe-card on-card-swipe="cardSwiped()" id="start-card">
+                        Swipe down for a new card
+                    </swipe-card>
+                <swipe-card class="front" ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-card-swipe="cardSwiped($index)">
 
-            <div ng-controller="CardCtrl">
-                <div ng-show="!showContent">
-                    <h1>&nbsp</h1>
-
-                    <h1>&nbsp</h1>
-
-                    <h1 align="center">{{card.title}}</h1>
-                </div>
-                <div class="item item-divider bar-assertive" ng-show="showContent">
-                    <h2 class="positive">{{card.title}}</h2>
-                </div>
-                <div class="title" ng-show="showContent">
-                    {{card.text}}
-                </div>
-            </div>
-        </swipe-card>
+                    <div ng-controller="CardCtrl">
+                        <div ng-show="!showContent">
+                            <h1>&nbsp</h1>
+                            <h1>&nbsp</h1>
+                            <h1 align="center">{{card.title}}</h1>
+                        </div>
+                        <div class="item item-divider bar-assertive" ng-show="showContent">
+                            <h2 class="positive">{{card.title}}</h2>
+                        </div>
+                        <div class="title" ng-show="showContent">
+                            {{card.text}}
+                        </div>
+                    </div>
+                </swipe-card>
 
 
     </swipe-cards>

@@ -1,3 +1,4 @@
+
 /**
  * Toggle
  * --------------------------------------------------
@@ -23,31 +24,31 @@
     }
   }
 
-  &.toggle-light {
+  &.toggle-light  {
     @include toggle-style($toggle-on-light-border, $toggle-on-light-bg);
   }
-  &.toggle-stable {
+  &.toggle-stable  {
     @include toggle-style($toggle-on-stable-border, $toggle-on-stable-bg);
   }
-  &.toggle-positive {
+  &.toggle-positive  {
     @include toggle-style($toggle-on-positive-border, $toggle-on-positive-bg);
   }
-  &.toggle-calm {
+  &.toggle-calm  {
     @include toggle-style($toggle-on-calm-border, $toggle-on-calm-bg);
   }
-  &.toggle-assertive {
+  &.toggle-assertive  {
     @include toggle-style($toggle-on-assertive-border, $toggle-on-assertive-bg);
   }
-  &.toggle-balanced {
+  &.toggle-balanced  {
     @include toggle-style($toggle-on-balanced-border, $toggle-on-balanced-bg);
   }
-  &.toggle-energized {
+  &.toggle-energized  {
     @include toggle-style($toggle-on-energized-border, $toggle-on-energized-bg);
   }
-  &.toggle-royal {
+  &.toggle-royal  {
     @include toggle-style($toggle-on-royal-border, $toggle-on-royal-bg);
   }
-  &.toggle-dark {
+  &.toggle-dark  {
     @include toggle-style($toggle-on-dark-border, $toggle-on-dark-bg);
   }
 }

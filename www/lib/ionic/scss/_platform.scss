@@ -1,8 +1,10 @@
+
 /**
  * Platform
  * --------------------------------------------------
  * Platform specific tweaks
  */
+
 
 /**
  * Apply roboto font
@@ -15,7 +17,6 @@
     font-family: "Roboto", $font-family-base;
   }
 }
-
 /*
 .platform-android {
 
@@ -135,7 +136,7 @@
   }
 }
 
-@media (orientation: landscape) {
+@media (orientation:landscape) {
   .platform-ios.platform-browser.platform-ipad {
     position: fixed; // required for iPad 7 Safari
   }

@@ -151,7 +151,7 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils',])
             "Demo": {cardindex: 0, cardindexprev: 0, random: false}
         });
         //===============================Switching Category============================
-        $scope.swtichCategory = function (category) {
+        $scope.switchCategory = function (category) {
             //put nav variables in current
             $scope.current.category = category;
             $scope.current.cardindex = $scope.nav.category.cardindex;
@@ -199,16 +199,16 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils',])
                 $scope.current.cardindex=index;
             }else if ($scope.current.random) {
 
-				//if highest card index in random card pool is higher than category length, generate new random card pool
-				if ((Math.max.apply(Math, $scope.randomCardPool) > $scope.data[$scope.current.category].length - 1) || ($scope.randomCardPool.length <= 0)) {
-					$scope.resetRandomCardPool($scope.data[$scope.current.category].length);
-				}
+                //if highest card index in random card pool is higher than category length, generate new random card pool
+                if ((Math.max.apply(Math, $scope.randomCardPool) > $scope.data[$scope.current.category].length - 1) || ($scope.randomCardPool.length <= 0)) {
+                    $scope.resetRandomCardPool($scope.data[$scope.current.category].length);
+                }
 
-				var randomindex = Math.floor(Math.random() * $scope.randomCardPool.length);
+                var randomindex = Math.floor(Math.random() * $scope.randomCardPool.length);
 
-				//sets random index and removes this index from random pool
-				$scope.current.cardindex = $scope.randomCardPool[randomindex];
-				$scope.randomCardPool.splice(randomindex, 1);
+                //sets random index and removes this index from random pool
+                $scope.current.cardindex = $scope.randomCardPool[randomindex];
+                $scope.randomCardPool.splice(randomindex, 1);
 
                 //pure random algorithm
                 //$scope.current.cardindex = Math.floor((Math.random() * $scope.data[$scope.current.category].length));

@@ -212,7 +212,7 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils',])
 
                 //pure random algorithm
                 //$scope.current.cardindex = Math.floor((Math.random() * $scope.data[$scope.current.category].length));
-			}
+            }
             else
             {
                 $scope.current.cardindex = ($scope.current.cardindex++) % $scope.data[$scope.current.category].length;

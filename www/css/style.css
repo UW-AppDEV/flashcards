@@ -99,7 +99,13 @@
 .swipe-card.pop-in {
   -webkit-animation: bounceIn 0.4s ease-out;
 }
-
+.bold{
+    font-weight: bold;
+}
+.auto-center{
+    margin-top:auto;
+    margin-left:auto;
+}
 /*==================================Accordion List==========================================*/
 
 .list .row.item-accordion{
@@ -126,20 +132,25 @@
     -webkit-transition: line-height 2s;
 }
 
-.bold{
-    font-weight: bold;
-}
+
 /*======================================checkbox color=====================================*/
 .grey{
     color: #b1b1b1;
 }
-
+.grey-background{
+    background-color:#b1b1b1;
+}
 .blue{
     color: #4a86ed;
 }
-
+.blue-background{
+    background-color: #4a86ed;
+}
 .lightblue{
     color: #43cde5;
+}
+.background-lightblue{
+    background-color: #43cde5;
 }
 .green{
     color: #66cb33;
@@ -151,17 +162,30 @@
 .orange{
     color: #efb740;
 }
+.orange-background{
+    background-color: #efb740;
+}
 .yellow{
     color:yellow;
 }
-
+.yellow-background{
+    background-color:yellow;
+}
 .red{
     color: #ed4e3a;
 }
-
+.red-background{
+    background-color: #ed4e3a;
+}
 .black{
     color: #444444;
 }
+.black-background{
+    background-color: #444444;
+}
 .white{
     color: #fcebd5;
+}
+.white-background{
+    background-color: #fcebd5;
 }

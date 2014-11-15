@@ -120,11 +120,15 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils',])
             alert(string);
         };
         $scope.current.cardFilter={colorTag:null};
+        
+        $scope.defaultCard = {
+            title: "Empty Category",
+            text: "Create a new card",
+            colorTag: "red"
+        };
+        
         $scope.data = $localstorage.getObject ('data',{
-                "Math 137": [
-                    {title:"Limit",text:"a limit is....",colorTag:"red"},
-                    {title:"Continuity",text:"continuity means ...",colorTag:"yellow"}
-                ],
+                "Math 137": [{"title":"One-to-one Functions","text":"A function f is one to one when, for x1, x2 are in the domain of f, f(x1)=f(x2)=> x1=x2","colorTag":"yellow"},{"title":"Limit Laws","text":"If lim f(x) = L as x->a and lim g(x) = M as x->a both exists, then\n1. lim [f(x) +or– g(x)] as x->a = L +or- M;\n2. lim [f(x) x g(x)] as x->a = LM;\n3. lim [f(x) / g(x)] as x->a = L/M, provided that M≠0;\n4. f(x) is a basic function and M belongs to the domain of f => lim (f(g(x))) as x->a = f(M)","colorTag":""},{"title":"Squeeze Theorem","text":"If f(x)<=g(x)<=h(x) for all x (except possibly x=a) and lim f(x) = L as x->a = lim h(x) = L as x->a, then lim g(x) = L as x->a","colorTag":""},{"title":"ε-δ Definition of a Limit","text":"lim f(x) = L as x->a if and only if, for all ε>0, there exists a δ>0, such that 0 < |x-a| <δ => |f(x)-L| < ε","colorTag":"blue"},{"title":"Definition of Continuity","text":"A function f is cts at a if lim f(x) as x->a = f(a)","colorTag":"blue"},{"title":"Continuity Theorems","text":"If f and g are continuous at x=a, then the following functions are also continuous at x=a: 1.f +or- g 2. fg 3. f/g, provided g(a)≠0 4. f(g(x)), provided f is cts at g(a)","colorTag":""},{"title":"Intermediate Value Theorem (IVT)","text":"If f is cts for all x in [a, b] and f(a) < 0 and f(b) > 0, then there exists a real number c in (a, b) such that f(c) = 0","colorTag":""},{"title":"L'Hôpital's Rule","text":"If f and g are diff and g'(x)≠0 in an open interval I that contains a (except possibly at a) and either (lim f(x) = 0 as x->a and lim g(x) = 0 as x->a) or (lim f(x) = +or-∞ as x->a and lim g(x) = =or-∞ as x->a) and lim f’(x)/g’(x) as x->a exists, then lim f(x)/g(x) as x->a = lim f’(x)/g’(x) as x->a","colorTag":""},{"title":"Fermat's/Local Extremum Theorem","text":"If f has a local extremum at point c and f'(c) exists, then f'(c)=0","colorTag":""},{"title":"Extreme Value Theorem (EVT)","text":"If f is cts on a closed interval [a, b], then f attains an absolute maximum value f(c) and an absolute minimum value f(d) at some points c, d in [a,b]","colorTag":""},{"title":"Mean Value Theorem (MVT)","text":"If a function f is cts on [a, b] and f is diff on (a, b), then there exists c in (a, b) such that f’(c) = [f(b) - f(a)]/(b-a)","colorTag":""},{"title":"Rolle's Theorem","text":"If f(a)=f(b), then f'(c)=0 for a<c<b","colorTag":""},{"title":"Constant Function Theorem","text":"If f'(x)=0 for all x in (a, b), then f is constant on (a, b)","colorTag":""},{"title":"Increasing/Decreasing Test","text":"Suppose f is cts on [a, b] and diff on (a, b), then 1. if f'(x)>0 for all x in (a, b), then f is increasing on (a, b); 2. if f'(x)<0 for all x in (a, b) then f is decreasing on (a, b)","colorTag":""}],
                 "Math 135":[
                     {title:"GCDOO",text:"Let a= ....",colorTag:""},
                     {title:"Fermat's little Theorem",text:"if p is a prime...",colorTag:""}
@@ -145,6 +149,7 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils',])
             "filler5": [],
             "filler6": []
         });
+
         $scope.nav = $localstorage.getObject('nav', {
             "Math 137": {cardindex: 0, cardindexprev: 0, random: true},
             "Math 135": {cardindex: 0, cardindexprev: 0, random: true},
@@ -181,9 +186,13 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils',])
             $scope.cards.splice(index, 1);
         };
         $scope.updatecardview = function (category, index) {
-            $scope.cards[0] = $scope.data[category][index];
+            //replacement update
+            $scope.cards = [];
+            $scope.addCard();
+            
+            /*$scope.cards[0] = $scope.data[category][index];
             $scope.current.category = category;
-            $scope.current.cardindex = index;
+            $scope.current.cardindex = index;*/
         };
         $scope.addCard = function () {
             //previous card index (for when items are deleted)
@@ -217,9 +226,15 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils',])
             {
                 $scope.current.cardindex = ($scope.current.cardindex++) % $scope.data[$scope.current.category].length;
             }
+            
+            if ($scope.data[$scope.current.category].length > 0) {
             var newCard = $scope.data[$scope.current.category][$scope.current.cardindex];
             newCard.id = Math.random();
             $scope.cards.push(angular.extend({}, newCard));
+            }
+            else {
+                $scope.cards.push(angular.extend({}, $scope.defaultCard));
+            }
         };
         //=================================ACTION SHEET=================================
         $scope.show = function () {
@@ -427,7 +442,9 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils',])
             promptPopup.then(function(res) {
                 console.log('you wanna change name from '+ categoryName +" to "+ res);
                 promptPopup.close();
-                if(!$scope.isCatNameUsed(categoryName)) {
+                if(res==''){
+                    $scope.showPopup("The name cannot be empty  ");
+                }else if(!$scope.isCatNameUsed(categoryName)){
                     $scope.renameCategory(categoryName, res);
                 }else{
                     $scope.showPopup("Your new name is used...please try again");
@@ -441,9 +458,20 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils',])
         $scope.renameCategory=function(oldCategoryName,newCategoryName){
             $scope.data[newCategoryName]=$scope.data[oldCategoryName];
             delete $scope.data[oldCategoryName];
+            $scope.updatecardview($scope.current.category,0);
         };
         $scope.deleteCategory=function(categoryName){
+            var next = function(db, key) {
+                for (var i = 0; i < db.length; i++) {
+                    if (db[i].key === key) {
+                        return db[i + 1] && db[i + 1].value;
+                    }
+                }
+            };
+            $scope.current.category=next($scope.current.category,categoryName);
             delete $scope.data[categoryName];
+            $scope.updatecardview($scope.current.category,0);
+            console.log($scope.current)
             //TODO saveData to localStorage
         };
         //==============================Flip Functions=====================================

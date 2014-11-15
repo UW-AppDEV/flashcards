@@ -34,15 +34,16 @@
                     </swipe-card>
                 <swipe-card class="front" ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-card-swipe="cardSwiped($index)">
 
-                    <div ng-controller="CardCtrl">
+                    <div ng-controller="CardCtrl" >
                         <div ng-show="!showContent">
                             <h1>&nbsp</h1>
                             <h1>&nbsp</h1>
                             <h1 align="center">{{card.title}}</h1>
                         </div>
-                        <div class="item item-divider bar-assertive" ng-show="showContent">
-                            <h2 class="positive">{{card.title}}</h2>
+                        <div class="item item-divider bar-assertive" ng-style="{'background-color':card.colorTag}" ng-show="showContent">
+                            <h2 class="bold" ng-class="">{{card.title}}</h2>
                         </div>
+
                         <div class="title" ng-show="showContent">
                             {{card.text}}
                         </div>

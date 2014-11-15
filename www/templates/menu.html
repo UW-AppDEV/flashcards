@@ -31,7 +31,7 @@
                         <div class="col" ng-repeat="subCategory in current.subCategories"
                              ng-show="isSubShown(key)"
                              ng-click="gotoCategory(key,subCategory)">
-                            <i class="icon ion-pricetag green"></i> <!--TODO change color classes accordingly-->
+                            <i class="icon ion-pricetag" ng-class="subCategory"></i> <!--TODO change color classes accordingly-->
                              </div>
                     </div>
                     <!--i class="icon ion-pricetag item-accordion green" ng-repeat="subCategory in current.subCategories"

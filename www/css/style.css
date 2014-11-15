@@ -38,7 +38,7 @@
       left:50%;
       box-sizing: border-box;
       background-color: rgb(255,255,255);
-      border-radius: 4px;
+      border-radius: 10px;
       overflow: hidden;
       -webkit-animation-fill-mode: forwards;
 }
@@ -58,7 +58,7 @@
 }
 .swipe-card .image img {
   width: 100%;
-  border-radius: 0px 0px 4px 4px;
+  border-radius: 0px 0px 10px 10px;
 }
 
 #start-card {
@@ -126,6 +126,9 @@
     -webkit-transition: line-height 2s;
 }
 
+.bold{
+    font-weight: bold;
+}
 /*======================================checkbox color=====================================*/
 .grey{
     color: #b1b1b1;
@@ -138,13 +141,18 @@
 .lightblue{
     color: #43cde5;
 }
-
 .green{
     color: #66cb33;
 }
+.green-background{
+    background-color: #66cb33;
+}
 
 .orange{
-    background-color: #efb740;
+    color: #efb740;
+}
+.yellow{
+    color:yellow;
 }
 
 .red{
@@ -153,4 +161,7 @@
 
 .black{
     color: #444444;
+}
+.white{
+    color: #fcebd5;
 }

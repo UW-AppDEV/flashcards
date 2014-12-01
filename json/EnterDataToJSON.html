@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../www/lib/ionic/js/angular/angular.js"></script>
+</head>
+<body ng-app="" ng-controller="dataCtrl" style="text-align:center">
+
+<input type="text" ng-model="title" style="width:200px"> <br/>
+<textarea ng-model="content"></textarea>
+<button ng-click="addCard()">Add Card</button> <br/>
+
+<textarea align="right">{{jsoned}}</textarea>
+
+<script>
+    function dataCtrl($scope){
+        var cards=[];
+        $scope.jsoned="";
+        $scope.addCard=function(){
+            cards.push({"title":$scope.title,"content":$scope.content});
+            $scope.title="";
+            $scope.content="";
+            $scope.jsoned=JSON.stringify(cards);
+
+        };
+
+    }
+    var math137 = [{"title":"One-to-one Functions","content":"A function f is one to one when, for x1, x2 are in the domain of f, f(x1)=f(x2)=> x1=x2"},{"title":"Limit Laws","content":"If lim f(x) = L as x->a and lim g(x) = M as x->a both exists, then\n1. lim [f(x) +or– g(x)] as x->a = L +or- M;\n2. lim [f(x) x g(x)] as x->a = LM;\n3. lim [f(x) / g(x)] as x->a = L/M, provided that M≠0;\n4. f(x) is a basic function and M belongs to the domain of f => lim (f(g(x))) as x->a = f(M)"},{"title":"Squeeze Theorem","content":"If f(x)<=g(x)<=h(x) for all x (except possibly x=a) and lim f(x) = L as x->a = lim h(x) = L as x->a, then lim g(x) = L as x->a"},{"title":"ε-δ Definition of a Limit","content":"lim f(x) = L as x->a if and only if, for all ε>0, there exists a δ>0, such that 0 < |x-a| <δ => |f(x)-L| < ε"},{"title":"Definition of Continuity","content":"A function f is cts at a if lim f(x) as x->a = f(a)"},{"title":"Continuity Theorems","content":"If f and g are continuous at x=a, then the following functions are also continuous at x=a: 1.f +or- g 2. fg 3. f/g, provided g(a)≠0 4. f(g(x)), provided f is cts at g(a)"},{"title":"Intermediate Value Theorem (IVT)","content":"If f is cts for all x in [a, b] and f(a) < 0 and f(b) > 0, then there exists a real number c in (a, b) such that f(c) = 0"},{"title":"L'Hôpital's Rule","content":"If f and g are diff and g'(x)≠0 in an open interval I that contains a (except possibly at a) and either (lim f(x) = 0 as x->a and lim g(x) = 0 as x->a) or (lim f(x) = +or-∞ as x->a and lim g(x) = =or-∞ as x->a) and lim f’(x)/g’(x) as x->a exists, then lim f(x)/g(x) as x->a = lim f’(x)/g’(x) as x->a"},{"title":"Fermat's/Local Extremum Theorem","content":"If f has a local extremum at point c and f'(c) exists, then f'(c)=0"},{"title":"Extreme Value Theorem (EVT)","content":"If f is cts on a closed interval [a, b], then f attains an absolute maximum value f(c) and an absolute minimum value f(d) at some points c, d in [a,b]"},{"title":"Mean Value Theorem (MVT)","content":"If a function f is cts on [a, b] and f is diff on (a, b), then there exists c in (a, b) such that f’(c) = [f(b) - f(a)]/(b-a)"},{"title":"Rolle's Theorem","content":"If f(a)=f(b), then f'(c)=0 for a<c<b"},{"title":"Constant Function Theorem","content":"If f'(x)=0 for all x in (a, b), then f is constant on (a, b)"},{"title":"Increasing/Decreasing Test","content":"Suppose f is cts on [a, b] and diff on (a, b), then 1. if f'(x)>0 for all x in (a, b), then f is increasing on (a, b); 2. if f'(x)<0 for all x in (a, b) then f is decreasing on (a, b)"}]
+;
+    for(var i=0;i<math137.length;i++){
+        math137[i]['colorTag']="";
+    }
+    console.log(JSON.stringify(math137));
+</script>
+</body>
+</html>

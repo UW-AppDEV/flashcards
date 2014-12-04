@@ -179,6 +179,7 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils',])
         $scope.setColorTag = function (color) {
             $scope.data[$scope.current.category][$scope.current.cardindex[0]].colorTag = color;
             $scope.cards[0].colorTag = color;
+            $scope.saveAll();
         };
 
         //===============================Switching Category============================
@@ -199,7 +200,7 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils',])
 		//generates array of elements 0 to n-1
 		$scope.resetRandomCardPool = function(n) {
 			$scope.randomCardPool = [];
-			for (i = 0; i < n; i++) {
+            for (var i = 0; i < n; i++) {
 				$scope.randomCardPool.push(i);
 			}
 		};
@@ -260,15 +261,22 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils',])
                     $scope.current.cardindex.splice(0, 1);
                 }
             }
+
             if ($scope.data[$scope.current.category].length > 0) {
                 var newCard = $scope.data[$scope.current.category][$scope.current.cardindex[0]];
                 newCard.id = Math.random();
                 $scope.cards.push(angular.extend({}, newCard));
-            }
-            else {
+            } else {
                 $scope.cards.push(angular.extend({}, $scope.defaultCard));
             }
         };
+        //=================================Save Changes================================
+        $scope.saveAll = function () {
+            //saves data to local storage
+            $localstorage.setObject('current', $scope.current);
+            $localstorage.setObject('data', $scope.data);
+        };
+
         //=================================ACTION SHEET=================================
         $scope.show = function () {
             // Show the action sheet
@@ -299,11 +307,30 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils',])
                 destructiveButtonClicked: function () {
                     //remove card
                     $scope.data[$scope.current.category].splice($scope.current.cardindex[0], 1);
-                    
+                    //the following ensures that when user deletes the last color-tagged card in a subcategory,
+                    //it switches to the normal category (all colors)
+                    if ($scope.current.cardFilter.colorTag !== null) {
+                        var cards = $scope.data[$scope.current.category];
+                        var switchToNormal = true;
+                        for (var i = 0; i < cards.length; i++) {
+                            if (cards[i].colorTag === $scope.current.cardFilter) {
+                                //it doesn't delete the last color-tagged card in the category, so we are safe
+                                switchToNormal = false;
+                                break;
+                            }
+                        }
+                        if (switchToNormal) {
+                            //resets the filter to null
+                            //i.e. go back to normal category
+                            $scope.current.cardFilter.colorTag = null;
+                        }
+                    }
                     //adds a new card after card is deleted
-                    $scope.cards = [];  
-                    $scope.addCard();
+                    $scope.cards = [];
+                    $scope.addCard(1);
                     //update view to previous card TODO
+                    //Han's comment: not really necessary
+                    $scope.saveAll();
                     return true;
                 }
             });
@@ -363,29 +390,46 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils',])
             $scope.data[$scope.current.category][$scope.current.cardindex[0]] = $scope.edit;
             $scope.updatecardview($scope.current.category, $scope.current.cardindex[0]);
             $scope.closeModal ('edit');
+            $scope.saveAll();
         };
         //=========================New Panel=================================
-        $scope.newstart = function (category, index) {
+        $scope.newstart = function () {
             $scope.edit = {title:"",text:""};
         };
         $scope.newsave = function () {
             $scope.data[$scope.current.category].splice($scope.current.cardindex[0], 0, $scope.edit);
             $scope.updatecardview($scope.current.category, $scope.current.cardindex[0]);
             $scope.closeModal ('new');
+            $scope.saveAll();
         };
         //=========================Menu functions=====================================
         $scope.current.subShown='';
         $scope.current.subCategories=[];
         $scope.gotoCategory=function(category,subCategory){
-            $scope.current.cardFilter.colorTag=subCategory ||null;
+            //set the cardFilter to the given subCategory (color)
+            $scope.current.cardFilter.colorTag = subCategory || null;
             $scope.current.category=category;
-            $scope.current.cardindex = [0];
+            var index = 0;
+            console.log($scope.current.cardindex[0]);
+            if ($scope.data[category].length > 0 && $scope.current.cardFilter.colorTag !== null) {
+                //get the first color-tagged card
+                index = ($scope.current.cardindex[0] + 1) % $scope.data[$scope.current.category].length;
+                while (index != $scope.current.cardindex[0]) {
+                    if ($scope.data[$scope.current.category][index].colorTag == $scope.current.cardFilter.colorTag) {
+                        break;
+                    }
+                    index = (index + 1) % $scope.data[$scope.current.category].length;
+                }
+            }
+
+            $scope.current.cardindex = [index];
             $scope.updatecardview($scope.current.category, $scope.current.cardindex[0]);
             $scope.closeModal('menu');
         };
         $scope.updateSubCategories=function(category){
             var cards =$scope.data[category];
             $scope.current.subCategories=[];
+            //add color types to the subcategory array
             var addSubCategory=function (color){
                 var isColorIn=false;
                 for(var i=0;i<$scope.current.subCategories.length;i++){
@@ -475,9 +519,7 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils',])
             $scope.data[newCategoryName]=$scope.data[oldCategoryName];
             delete $scope.data[oldCategoryName];
             $scope.updatecardview($scope.current.category,0);
-            //saves data to local storage
-            $localstorage.setObject('current',$scope.current);
-            $localstorage.setObject('data',$scope.data);
+            $scope.saveAll();
         };
         $scope.deleteCategory=function(categoryName){
             //change category if the user is in the deleted category
@@ -494,9 +536,7 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils',])
             }
             delete $scope.data[categoryName];
             $scope.updatecardview($scope.current.category,0);
-            //saves data to local storage
-            $localstorage.setObject('current',$scope.current);
-            $localstorage.setObject('data',$scope.data);
+            $scope.saveAll();
         };
         $scope.showNewCategory=function(){
             var promptPopup=$ionicPopup.prompt({
@@ -510,14 +550,14 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils',])
                 if(res===''||res=="undefined"){
                     $scope.showPopup("The name cannot be empty");
                 }else if(!$scope.isCatNameUsed(res)){
-                    $scope.data[res]=[$scope.defaultCard]; //TODO create a default here
+                    $scope.data[res] = [$scope.defaultCard];
+                    $scope.saveAll();
                 }else{
-                    $timeout(function(){$scope.showPopup("Your new name is used...please try again");},5);
+                    $scope.showPopup("Your new name is used...please try again");
                 }
 
             });
         };
-        $scope.showPopup("test");
         //==============================Flip Functions=====================================
         $scope.isFlipped=false;
         $scope.toggleFlip=function(){

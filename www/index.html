@@ -27,35 +27,38 @@
 
     <swipe-cards>
 
-                    <swipe-card on-card-swipe="cardSwiped()" id="start-card">
-                        Swipe down for a new card
-                    </swipe-card>
-                <swipe-card class="front"
-                            ng-repeat="card in cards"
-                            on-destroy="cardDestroyed($index)"
-                            on-card-swipe="cardSwiped($index)"
-                            ng-click="showContent=!showContent">
+        <swipe-card on-card-swipe="cardSwiped()" id="start-card" ng-show="isFirstTimeUser">
+            Swipe down for a new card
+        </swipe-card>
+        <swipe-card
+                ng-repeat="card in cards"
+                on-destroy="cardDestroyed($index)"
+                on-card-swipe="cardSwiped($index)"
+                ng-click="showContent=!showContent">
 
-                    <div ng-controller="CardCtrl" >
-                        <div ng-show="!showContent" style="width:300px;height:300px;" ng-class="card.colorTag+'-background'">
-                        <div class="auto-center">
-                            <h1>&nbsp</h1>
-                            <h1>&nbsp</h1>
-                            <h1 class="bold" align="center">{{card.title}}</h1></div>
-                        </div>
-                        <div class="item item-divider bar-assertive" ng-class="card.colorTag+'-background'" ng-show="showContent">
-                            <h2 class="bold">{{card.title}}</h2>
-                        </div>
-                        <div class="title" ng-show="showContent" style="margin-left:10px; margin-right:10px">
-                            {{card.text}}
-                        </div>
-                        <!--Change made by Han, Nov 18-->
-                        <div ng-show="showContent" stop-event class="color-tag" ng-click="openPopover($event)">
-                            <i class="icon ion-ios7-pricetag" style="font-size: 2em;"
-                               ng-class="card.colorTag==''? 'default':card.colorTag"></i>
-                        </div>
-                    </div>
-                </swipe-card>
+            <div ng-controller="CardCtrl">
+                <div ng-show="!showContent" style="width:300px;height:300px;" ng-class="card.colorTag+'-background'">
+                    <div class="auto-center">
+                        <h1>&nbsp</h1>
+
+                        <h1>&nbsp</h1>
+
+                        <h1 class="bold" align="center">{{card.title}}</h1></div>
+                </div>
+                <div class="item item-divider bar-assertive" ng-class="card.colorTag+'-background'"
+                     ng-show="showContent">
+                    <h2 class="bold">{{card.title}}</h2>
+                </div>
+                <div class="title" ng-show="showContent" style="margin-left:10px; margin-right:10px">
+                    {{card.text}}
+                </div>
+                <!--Change made by Han, Nov 18-->
+                <div ng-show="showContent" stop-event class="color-tag" ng-click="openPopover($event)">
+                    <i class="icon ion-ios7-pricetag" style="font-size: 2em;"
+                       ng-class="card.colorTag==''? 'default':card.colorTag"></i>
+                </div>
+            </div>
+        </swipe-card>
 
 
     </swipe-cards>

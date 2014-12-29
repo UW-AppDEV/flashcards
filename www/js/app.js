@@ -15,7 +15,7 @@ angular.module('ionic.utils', [])
             }
         }
     }]);
-angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils',])
+angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils'])
 
     .run(function ($ionicPlatform, $localstorage) {
         $ionicPlatform.ready(function () {
@@ -112,7 +112,7 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils',])
         };
     })*/
     .controller('CardsCtrl', function ($scope, $ionicSwipeCardDelegate, $ionicModal, $ionicActionSheet, $timeout, $localstorage, $ionicPopup, $ionicPopover) {
-        //=============================Actual Cards Stuff =================================
+        //=============================Initialize $scope variables=================================
         $scope.current = $localstorage.getObject('current', {category: 'Demo', cardindex: [0], random: true});
         $scope.showContent = true;
         $scope.edit = [{}];
@@ -125,22 +125,37 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils',])
             text: "Create a new card",
             colorTag: "red"
         };
-        
+
         $scope.data = $localstorage.getObject ('data',{
-                "Math 137": [{"title":"One-to-one Functions","text":"A function f is one to one when, for x1, x2 are in the domain of f, f(x1)=f(x2)=> x1=x2","colorTag":"yellow"},{"title":"Limit Laws","text":"If lim f(x) = L as x->a and lim g(x) = M as x->a both exists, then\n1. lim [f(x) +or– g(x)] as x->a = L +or- M;\n2. lim [f(x) x g(x)] as x->a = LM;\n3. lim [f(x) / g(x)] as x->a = L/M, provided that M≠0;\n4. f(x) is a basic function and M belongs to the domain of f => lim (f(g(x))) as x->a = f(M)","colorTag":""},{"title":"Squeeze Theorem","text":"If f(x)<=g(x)<=h(x) for all x (except possibly x=a) and lim f(x) = L as x->a = lim h(x) = L as x->a, then lim g(x) = L as x->a","colorTag":""},{"title":"ε-δ Definition of a Limit","text":"lim f(x) = L as x->a if and only if, for all ε>0, there exists a δ>0, such that 0 < |x-a| <δ => |f(x)-L| < ε","colorTag":"blue"},{"title":"Definition of Continuity","text":"A function f is cts at a if lim f(x) as x->a = f(a)","colorTag":"blue"},{"title":"Continuity Theorems","text":"If f and g are continuous at x=a, then the following functions are also continuous at x=a: 1.f +or- g 2. fg 3. f/g, provided g(a)≠0 4. f(g(x)), provided f is cts at g(a)","colorTag":""},{"title":"Intermediate Value Theorem (IVT)","text":"If f is cts for all x in [a, b] and f(a) < 0 and f(b) > 0, then there exists a real number c in (a, b) such that f(c) = 0","colorTag":""},{"title":"L'Hôpital's Rule","text":"If f and g are diff and g'(x)≠0 in an open interval I that contains a (except possibly at a) and either (lim f(x) = 0 as x->a and lim g(x) = 0 as x->a) or (lim f(x) = +or-∞ as x->a and lim g(x) = =or-∞ as x->a) and lim f’(x)/g’(x) as x->a exists, then lim f(x)/g(x) as x->a = lim f’(x)/g’(x) as x->a","colorTag":""},{"title":"Fermat's/Local Extremum Theorem","text":"If f has a local extremum at point c and f'(c) exists, then f'(c)=0","colorTag":""},{"title":"Extreme Value Theorem (EVT)","text":"If f is cts on a closed interval [a, b], then f attains an absolute maximum value f(c) and an absolute minimum value f(d) at some points c, d in [a,b]","colorTag":""},{"title":"Mean Value Theorem (MVT)","text":"If a function f is cts on [a, b] and f is diff on (a, b), then there exists c in (a, b) such that f’(c) = [f(b) - f(a)]/(b-a)","colorTag":""},{"title":"Rolle's Theorem","text":"If f(a)=f(b), then f'(c)=0 for a<c<b","colorTag":""},{"title":"Constant Function Theorem","text":"If f'(x)=0 for all x in (a, b), then f is constant on (a, b)","colorTag":""},{"title":"Increasing/Decreasing Test","text":"Suppose f is cts on [a, b] and diff on (a, b), then 1. if f'(x)>0 for all x in (a, b), then f is increasing on (a, b); 2. if f'(x)<0 for all x in (a, b) then f is decreasing on (a, b)","colorTag":""}],
-                "Math 135":[
-                    {title:"GCDOO",text:"Let a= ....",colorTag:""},
-                    {title:"Fermat's little Theorem",text:"if p is a prime...",colorTag:""}
-                ],
-                'Demo':[
-                    {title: 'Swipe down to clear the card',text:'clear this card',colorTag:"red"},
-                    {title: 'Where is this?',text:'',colorTag:"yellow"},
-                    {title: 'What kind of grass is this?',text:'',colorTag:"green"},
-                    {title: 'What beach is this?',text:'',colorTag:"blue"},
-                    {title: 'test1',text:'',colorTag:"red"},
-                    {title: 'test2',text:'',colorTag:"red"},
-                    {title: 'test3',text:'',colorTag:"red"}
-                ],
+            "Math 137": [
+                {"title": "One-to-one Functions", "text": "A function f is one to one when, for x1, x2 are in the domain of f, f(x1)=f(x2)=> x1=x2", "colorTag": "yellow"},
+                {"title": "Limit Laws", "text": "If lim f(x) = L as x->a and lim g(x) = M as x->a both exists, then\n1. lim [f(x) +or– g(x)] as x->a = L +or- M;\n2. lim [f(x) x g(x)] as x->a = LM;\n3. lim [f(x) / g(x)] as x->a = L/M, provided that M≠0;\n4. f(x) is a basic function and M belongs to the domain of f => lim (f(g(x))) as x->a = f(M)", "colorTag": ""},
+                {"title": "Squeeze Theorem", "text": "If f(x)<=g(x)<=h(x) for all x (except possibly x=a) and lim f(x) = L as x->a = lim h(x) = L as x->a, then lim g(x) = L as x->a", "colorTag": ""},
+                {"title": "ε-δ Definition of a Limit", "text": "lim f(x) = L as x->a if and only if, for all ε>0, there exists a δ>0, such that 0 < |x-a| <δ => |f(x)-L| < ε", "colorTag": "blue"},
+                {"title": "Definition of Continuity", "text": "A function f is cts at a if lim f(x) as x->a = f(a)", "colorTag": "blue"},
+                {"title": "Continuity Theorems", "text": "If f and g are continuous at x=a, then the following functions are also continuous at x=a: 1.f +or- g 2. fg 3. f/g, provided g(a)≠0 4. f(g(x)), provided f is cts at g(a)", "colorTag": ""},
+                {"title": "Intermediate Value Theorem (IVT)", "text": "If f is cts for all x in [a, b] and f(a) < 0 and f(b) > 0, then there exists a real number c in (a, b) such that f(c) = 0", "colorTag": ""},
+                {"title": "L'Hôpital's Rule", "text": "If f and g are diff and g'(x)≠0 in an open interval I that contains a (except possibly at a) and either (lim f(x) = 0 as x->a and lim g(x) = 0 as x->a) or (lim f(x) = +or-∞ as x->a and lim g(x) = =or-∞ as x->a) and lim f’(x)/g’(x) as x->a exists, then lim f(x)/g(x) as x->a = lim f’(x)/g’(x) as x->a", "colorTag": ""},
+                {"title": "Fermat's/Local Extremum Theorem", "text": "If f has a local extremum at point c and f'(c) exists, then f'(c)=0", "colorTag": ""},
+                {"title": "Extreme Value Theorem (EVT)", "text": "If f is cts on a closed interval [a, b], then f attains an absolute maximum value f(c) and an absolute minimum value f(d) at some points c, d in [a,b]", "colorTag": ""},
+                {"title": "Mean Value Theorem (MVT)", "text": "If a function f is cts on [a, b] and f is diff on (a, b), then there exists c in (a, b) such that f’(c) = [f(b) - f(a)]/(b-a)", "colorTag": ""},
+                {"title": "Rolle's Theorem", "text": "If f(a)=f(b), then f'(c)=0 for a<c<b", "colorTag": ""},
+                {"title": "Constant Function Theorem", "text": "If f'(x)=0 for all x in (a, b), then f is constant on (a, b)", "colorTag": ""},
+                {"title": "Increasing/Decreasing Test", "text": "Suppose f is cts on [a, b] and diff on (a, b), then 1. if f'(x)>0 for all x in (a, b), then f is increasing on (a, b); 2. if f'(x)<0 for all x in (a, b) then f is decreasing on (a, b)", "colorTag": ""}
+            ],
+            "Math 135": [
+                {title: "GCDOO", text: "Let a= ....", colorTag: ""},
+                {title: "Fermat's little Theorem", text: "if p is a prime...", colorTag: ""}
+            ],
+            'Demo': [
+                {title: 'Swipe down to clear the card', text: 'clear this card', colorTag: "red"},
+                {title: 'Where is this?', text: '', colorTag: "yellow"},
+                {title: 'What kind of grass is this?', text: '', colorTag: "green"},
+                {title: 'What beach is this?', text: '', colorTag: "blue"},
+                {title: 'test1', text: '', colorTag: "red"},
+                {title: 'test2', text: '', colorTag: "red"},
+                {title: 'test3', text: '', colorTag: "red"}
+            ],
             "filler": [],
             "filler2": [],
             "filler3": []
@@ -151,63 +166,24 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils',])
             "Math 135": {cardindex: [0], random: true},
             "Demo": {cardindex: [0], random: false}
         });
-        //=================================Pop Over/Color Tag=======================================
-        $ionicPopover.fromTemplateUrl('templates/popover.html', {
-            scope: $scope
-        }).then(function (popover) {
-            $scope.popover = popover;
-            console.log("popover is " + popover);
-        });
-        $scope.openPopover = function ($event) {
-            $scope.popover.show($event);
-        };
-        $scope.closePopover = function () {
-            $scope.popover.hide();
-        };
-        //Cleanup the popover when we're done with it!
-        $scope.$on('$destroy', function () {
-            $scope.popover.remove();
-        });
-        // Execute action on hide popover
-        $scope.$on('popover.hidden', function () {
-            // Execute action
-        });
-        // Execute action on remove popover
-        $scope.$on('popover.removed', function () {
-            // Execute action
-        });
-        $scope.setColorTag = function (color) {
-            $scope.data[$scope.current.category][$scope.current.cardindex[0]].colorTag = color;
-            $scope.cards[0].colorTag = color;
-            $scope.saveAll();
-        };
-
-        //===============================Switching Category============================
-        $scope.switchCategory = function (category) {
-            //put nav variables in current
-            $scope.current.category = category;
-            $scope.current.cardindex = $scope.nav.category.cardindex;
-            $scope.current.random = $scope.nav.category.random;
-            //update view
-            $scope.updatecardview($scope.current.category, $scope.current.cardindex[0]);
-        };
-
-        //====================================Cardswiper================================
+        //====================================Card swiper================================
         $scope.cards = Array.prototype.slice.call($scope.data[$scope.current.category], 0, 0);
 
-		$scope.randomCardPool = []; //random card pool to select next card from
+        $scope.randomCardPool = []; //random card pool to select next card from
 
-		//generates array of elements 0 to n-1
-		$scope.resetRandomCardPool = function(n) {
-			$scope.randomCardPool = [];
+        //generates array of elements 0 to n-1
+        $scope.resetRandomCardPool = function (n) {
+            $scope.randomCardPool = [];
             for (var i = 0; i < n; i++) {
-				$scope.randomCardPool.push(i);
-			}
-		};
+                $scope.randomCardPool.push(i);
+            }
+        };
 
         $scope.cardSwiped = function () {
             console.log(direction);
             $scope.addCard(direction);
+            //whenever user clicks, taps or does anything, it is not considered "first Time"
+            $scope.setFirstTimeFalse();
         };
         $scope.cardDestroyed = function (index) {
             $scope.cards.splice(index, 1);
@@ -270,15 +246,67 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils',])
                 $scope.cards.push(angular.extend({}, $scope.defaultCard));
             }
         };
+
+        //==========================is the user first time opening the app?==================================
+        $scope.isFirstTimeUser = $localstorage.getObject('isFirstTimeUser', true);
+        if (!$scope.isFirstTimeUser) {
+            $scope.addCard();
+        }
+        //=================================Pop Over/Color Tag=======================================
+        $ionicPopover.fromTemplateUrl('templates/popover.html', {
+            scope: $scope
+        }).then(function (popover) {
+            $scope.popover = popover;
+            console.log("popover is " + popover);
+        });
+        $scope.openPopover = function ($event) {
+            $scope.popover.show($event);
+        };
+        $scope.closePopover = function () {
+            $scope.popover.hide();
+        };
+        //Cleanup the popover when we're done with it!
+        $scope.$on('$destroy', function () {
+            $scope.popover.remove();
+        });
+        // Execute action on hide popover
+        $scope.$on('popover.hidden', function () {
+            // Execute action
+        });
+        // Execute action on remove popover
+        $scope.$on('popover.removed', function () {
+            // Execute action
+        });
+        $scope.setColorTag = function (color) {
+            $scope.data[$scope.current.category][$scope.current.cardindex[0]].colorTag = color;
+            $scope.cards[0].colorTag = color;
+            $scope.saveAll();
+        };
+
+        //===============================Switching Category============================
+        $scope.switchCategory = function (category) {
+            //put nav variables in current
+            $scope.current.category = category;
+            $scope.current.cardindex = $scope.nav.category.cardindex;
+            $scope.current.random = $scope.nav.category.random;
+            //update view
+            $scope.updatecardview($scope.current.category, $scope.current.cardindex[0]);
+        };
+
+
         //=================================Save Changes================================
         $scope.saveAll = function () {
             //saves data to local storage
             $localstorage.setObject('current', $scope.current);
             $localstorage.setObject('data', $scope.data);
         };
-
+        $scope.setFirstTimeFalse = function () {
+            $localstorage.setObject('isFirstTimeUser', false);
+        };
         //=================================ACTION SHEET=================================
         $scope.show = function () {
+            //whenever user clicks, taps or does anything, it is not considered "first Time"
+            $scope.setFirstTimeFalse();
             // Show the action sheet
             var hideSheet = $ionicActionSheet.show({
                 buttons: [
@@ -358,6 +386,8 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils',])
             $scope.modalmenu = modal;
         });
         $scope.openModal = function (id) {
+            //whenever user clicks, taps or does anything, it is not considered "first Time"
+            $scope.setFirstTimeFalse();
             if (id == "new"){
                 $scope.modalnew.show();
             }

@@ -161,9 +161,10 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils'])
             "filler3": []
         });
 
+        //initialize navigation array
         $scope.nav = $localstorage.getObject('nav', {
-            "Math 137": {cardindex: [0], random: true},
-            "Math 135": {cardindex: [0], random: true},
+            "Math 137": {cardindex: [0], random: false},
+            "Math 135": {cardindex: [0], random: false},
             "Demo": {cardindex: [0], random: false}
         });
         //====================================Card swiper================================
@@ -193,16 +194,10 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils'])
             //$scope.cards = [];
             //$scope.addCard();
             //Update card view is intended to update UI, addcard should be implemented elsewhere. Commented for now due to some bugs
-            if($scope.data[category].length>0){
+            //TODO this needs to be refactored along with addCard()
                 $scope.cards[0] = $scope.data[category][index];
                 $scope.current.category = category;
                 $scope.current.cardindex[0] = index;
-            }else{
-                $scope.data[category].push($scope.defaultCard);
-                $scope.cards[0] = $scope.data[category][0];
-                $scope.current.category = category;
-                $scope.current.cardindex[0] = 0;
-            }
 
         };
         $scope.addCard = function ($index) {
@@ -241,14 +236,11 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils'])
                     $scope.current.cardindex.splice(0, 1);
                 }
             }
-
-            if ($scope.data[$scope.current.category].length > 0) {
                 var newCard = $scope.data[$scope.current.category][$scope.current.cardindex[0]];
-                newCard.id = Math.random();
+            //newCard.id = Math.random();
                 $scope.cards.push(angular.extend({}, newCard));
-            } else {
-                $scope.cards.push(angular.extend({}, $scope.defaultCard));
-            }
+
+
         };
 
         //==========================is the user first time opening the app?==================================
@@ -360,8 +352,6 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils'])
                     //adds a new card after card is deleted
                     $scope.cards = [];
                     $scope.addCard(1);
-                    //update view to previous card TODO
-                    //Han's comment: not really necessary
                     $scope.saveAll();
                     return true;
                 }
@@ -446,6 +436,7 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils'])
             var index = 0;
             console.log($scope.current.cardindex[0]);
             if ($scope.data[category].length > 0 && $scope.current.cardFilter.colorTag !== null) {
+                //TODO this needs to be refactored, consider doing it in addCard()
                 //get the first color-tagged card
                 index = ($scope.current.cardindex[0] + 1) % $scope.data[$scope.current.category].length;
                 while (index != $scope.current.cardindex[0]) {

@@ -8,7 +8,12 @@ empty category is literally a card, -> fix: display some texts under the card
 FIXED swipe down to clear card not really needed when opening up the app the second time.
 
 fix local storage
+
 fix empty category problem
+Dec 31
+    needs to refactor updatecardview and addcard()
+    those are very similar in nature
+
 
 
 FURTHER FEATURE:

@@ -205,8 +205,10 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils'])
             }
 
         };
-        $scope.addCard = function (direction) {
+        $scope.addCard = function ($index) {
+            //go to the next card
             if (direction == 1) {
+                //is the color filter on? if yes, move to the next card of the same color
                 if ($scope.current.cardFilter.colorTag !== null && $scope.current.random) {
                     var index = ($scope.current.cardindex[0] + 1) % $scope.data[$scope.current.category].length;
                     while (index != $scope.current.cardindex[0]) {
@@ -215,8 +217,9 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils'])
                         }
                         index = (index + 1) % $scope.data[$scope.current.category].length;
                     }
+                    //add the index to the recording array
                     $scope.current.cardindex.unshift(index);
-                } else if ($scope.current.random) {
+                } else if ($scope.current.random) { //if the card displayed randomly
                     //if highest card index in random card pool is higher than category length, generate new random card pool
                     if ((Math.max.apply(Math, $scope.randomCardPool) > $scope.data[$scope.current.category].length - 1) || ($scope.randomCardPool.length <= 0)) {
                         $scope.resetRandomCardPool($scope.data[$scope.current.category].length);
@@ -227,11 +230,12 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils'])
                     $scope.randomCardPool.splice(randomindex, 1);
                 }
                 else {
+                    //simply go to the next card
                     $scope.current.cardindex.unshift(($scope.current.cardindex[0]++) % $scope.data[$scope.current.category].length);
                 }
             }
-            else if (direction == -1)
-            {
+            //go back one card
+            else if (direction == -1) {
                 if ($scope.current.cardindex.length > 1)//as long as card history exists
                 {
                     $scope.current.cardindex.splice(0, 1);

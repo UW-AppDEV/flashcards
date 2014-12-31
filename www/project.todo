@@ -1,9 +1,11 @@
-Local storage still not working, can someone look into it??
-Also would be nice to have a menu.html with a list that dislays all data.(categories)
+Refactoring:
+    comment code
+    refactor logic as neccessary
+    write documentation
 
 ISSUES:
 empty category is literally a card, -> fix: display some texts under the card
-swipe down to clear card not really needed when opening up the app the second time.
+FIXED swipe down to clear card not really needed when opening up the app the second time.
 
 fix local storage
 fix empty category problem
@@ -13,4 +15,4 @@ FURTHER FEATURE:
 Firebase syncing
 local to Firebase merging
 image support
-HTML card rendering
+HTML card rendering GitHub markup

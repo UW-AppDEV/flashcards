@@ -99,6 +99,8 @@
 .swipe-card.pop-in {
   -webkit-animation: bounceIn 0.4s ease-out;
 }
+
+/*================================Quick Fixes=========================*/
 .bold{
     font-weight: bold;
 }
@@ -114,6 +116,28 @@
 .popup{
     z-index:12;
 }
+
+/*Default Text*/
+.default-text {
+    width: 300px;
+    height: 300px;
+    margin-top: -150px;
+    margin-left: -150px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    text-align: center;
+    font-size: 3em;
+    background-color: #334fff;
+    word-wrap: break-word;
+    border: 6px solid #5c69ff;
+    border-radius: 20px;
+}
+
+.default-text > h1 {
+    color: #fff;
+}
+
 /*==================================Accordion List==========================================*/
 
 .list .row.item-accordion{

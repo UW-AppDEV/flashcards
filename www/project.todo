@@ -4,8 +4,9 @@ Refactoring:
     write documentation
 
 ISSUES:
-empty category is literally a card, -> fix: display some texts under the card
+FIXED empty category is literally a card, -> fix: display some texts under the card
 FIXED swipe down to clear card not really needed when opening up the app the second time.
+dynamically center and scale texts in the title. consider using an angular directive
 
 fix local storage
 

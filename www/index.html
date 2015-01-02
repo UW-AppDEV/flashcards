@@ -25,6 +25,9 @@
 </ion-header-bar>
 <ion-pane>
 
+    <div class="default-text" ng-show="isCategoryEmpty()">
+        <h1>Please add card to this category, so far you have nothing :P</h1>
+    </div>
     <swipe-cards>
 
         <swipe-card on-card-swipe="cardSwiped()" id="start-card" ng-show="isFirstTimeUser">
@@ -34,9 +37,10 @@
                 ng-repeat="card in cards"
                 on-destroy="cardDestroyed($index)"
                 on-card-swipe="cardSwiped($index)"
-                ng-click="showContent=!showContent">
 
-            <div ng-controller="CardCtrl">
+                ng-click="showContent=!showContent" ng-show="!isCategoryEmpty()">
+
+        <div ng-controller="CardCtrl">
                 <div ng-show="!showContent" style="width:300px;height:300px;" ng-class="card.colorTag+'-background'">
                     <div class="auto-center">
                         <h1>&nbsp</h1>

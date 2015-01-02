@@ -160,7 +160,10 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils'])
             "filler2": [],
             "filler3": []
         });
-
+        $scope.isCategoryEmpty = function () {
+            var category = $scope.data[$scope.current.category];
+            return !category || category.length <= 0;
+        };
         //initialize navigation array
         $scope.nav = $localstorage.getObject('nav', {
             "Math 137": {cardindex: [0], random: false},
@@ -583,7 +586,7 @@ angular.module('starter', ['ionic', 'ionic.contrib.ui.cards', 'ionic.utils'])
 
             });
         };
-        //==============================Flip Functions=====================================
+        //==============================Flip Functions (Obsolete)=====================================
         $scope.isFlipped=false;
         $scope.toggleFlip=function(){
             $scope.isFlipped=!$scope.isFlipped;

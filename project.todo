@@ -1,0 +1,23 @@
+Refactoring:
+    comment code
+    refactor logic as neccessary
+    write documentation
+
+ISSUES:
+FIXED empty category is literally a card, -> fix: display some texts under the card
+FIXED swipe down to clear card not really needed when opening up the app the second time.
+dynamically center and scale texts in the title. consider using an angular directive
+
+fix local storage
+fix empty category problem
+Dec 31
+    needs to refactor updatecardview and addcard()
+    those are very similar in nature
+
+
+
+FURTHER FEATURE:
+Firebase syncing
+local to Firebase merging
+image support
+HTML card rendering GitHub markup

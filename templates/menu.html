@@ -1,0 +1,44 @@
+<ion-modal-view>
+    <link href="css/style.css" rel="stylesheet">
+    <!-- Modal header bar -->
+    <ion-header-bar class="bar bar-header bar-positive">
+        <button class="button button-icon icon ion-ios7-plus" ng-click="showNewCategory()"></button>
+        <h1 class="title">Menu</h1>
+        <button class="button button-clear button-primary" ng-click="closeModal('menu')">Cancel</button>
+    </ion-header-bar>
+
+    <!--Modal content area-->
+    <ion-content>
+        <ion-list class="list" can-swipe="true">
+            <div ng-repeat="(key, prop) in data track by key">
+                <ion-item  class="item item-stable" ng-class="{active: current.category == key}"
+                                      ng-click="gotoCategory(key);">
+                <i class="icon"
+                   ng-class="isSubShown(key)?'ion-minus-round':'ion-plus-round'"
+                   ng-click="updateSubCategories(key); toggleSubCategory(key);"
+                        stop-event></i>
+                &nbsp;
+                {{key}}
+                <ion-option-button class="button button-positive" ng-click="showEditPrompt(key)">
+                    Edit
+                </ion-option-button>
+                <ion-option-button class="button button-assertive" ng-click="showDeleteConfirm(key)">
+                    Delete
+                </ion-option-button>
+            </ion-item>
+
+                    <div class="row item-accordion test-animation" style="max-width:40%">
+                        <div class="col" ng-repeat="subCategory in current.subCategories"
+                             ng-show="isSubShown(key)"
+                             ng-click="gotoCategory(key,subCategory)">
+                            <i class="icon ion-pricetag" ng-class="subCategory"></i> <!--TODO change color classes accordingly-->
+                             </div>
+                    </div>
+                    <!--i class="icon ion-pricetag item-accordion green" ng-repeat="subCategory in current.subCategories"
+                            ng-show="isSubShown(key)"
+                            ng-click="gotoCategory(key,subCategory)">
+                    </i-->
+            </div>
+        </ion-list>
+    </ion-content>
+</ion-modal-view>
